@@ -1,0 +1,36 @@
+.footer{
+    /* background-color: red; */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    color: whitesmoke;
+    border-top: 1px white solid;
+    border-right: 100px transparent solid;
+    border-left: 100px transparent solid;
+    padding-top: 5px;
+    display: flex;
+    
+}
+
+.footer .profile{
+    /* background-color: aqua; */
+    display: flex;
+    width: 120px;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: aqua; */
+    transform: translateX(-80px);
+}
+
+.footer .profile span{
+    transform: translateX(10px);
+}
+
+.footer .profile span:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+}
