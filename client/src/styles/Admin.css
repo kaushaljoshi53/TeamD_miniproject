@@ -1,0 +1,240 @@
+/* Navbar.css */
+.Dashboard {
+    display: flex;
+    height: 100vh;
+    
+  }
+  
+  .LeftSide {
+   
+    background: linear-gradient(#19105b, #472067, #7c3375, #FF6196);
+    width: 250;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    font-size: 12.5px;
+    padding: 20px; /* Add padding as needed */
+  }
+  
+  .RightSide {
+    flex: 1;
+    background-color: #fff; /* Set a background color for the right side */
+    padding: 3px; /* Add padding as needed */
+    margin-left: 237px;
+   
+    
+  }
+  
+  /* Dashboard.css */
+.Header img {
+    max-width: 50px; /* Set the maximum width of the image */
+    height: auto; /* Maintain the image's aspect ratio */
+    border-radius: 50%; /* Add a border-radius to make it round (optional) */
+    padding-left: 10px;
+
+  }
+  .body {
+    flex: 1;
+    margin-left: 15px;
+  }
+  .Optionlist {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  .Optionlist li {
+    padding: 5px;
+    cursor: pointer;
+  }
+  .footer {
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+  }
+
+  /* Add styles for images, Name, and button as needed */
+  .footer img {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    transform: translateY(-5px);
+    background-color: white;
+    border-radius: 50%;
+  }
+  .footer .Name{
+ transform: translateX(-2px);
+  }
+  .footer span:hover{
+    cursor: pointer;
+  }
+  .LogoutIcon {
+    font-size: 15px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: white;
+  }
+
+
+  
+  /* Modal button style */
+.modal-button {
+    background-color: #3498db;
+    color: #069778;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Modal style */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Modal content style */
+  .modal-content {
+    background-color: #e63030;
+    margin: 15% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Modal submit button style */
+  .modal-submit {
+    background-color: #FF6196;
+    color: #12ad40;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  /* Close modal button style (if needed) */
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+
+  .form-container {
+    color: #19105b;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #FF6196;
+    background: rgb(145, 128, 240);
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+  }
+
+  .add-event-button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .add-event-button1 {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .form-container {
+    position: relative;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: -15px;
+    right: 10px;
+    cursor: pointer;
+  }
+  
+  .close-mark {
+    font-size: 53px;
+    color: red;
+  }
+ 
+  @media (max-width: 768px) {
+    .form-container {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  @media (max-width: 873px) {
+    .RightSide {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  @media (min-width: 360px) {
+    .LeftSide {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+
+  .values{
+    background-color: #3498db;
+
+  }
+  
+  /* eventsList.css */
+
+/* Style for the list item */
+.event-item {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+  }
+  
+  /* Style for event information */
+  .event-info {
+    margin-bottom: 5px;
+  }
+  
+  /* Additional styles for strong tags within event information */
+  .event-info strong {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  
+  /* Customize other styles as needed */
+  
+  
+  
+
+  
+  
