@@ -2,18 +2,30 @@ import React from "react";
 import "../styles/Signup.css";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react'
+import { Validations } from "../validations/Validation";
+import { userdata } from "../models/Userdata";
+
 const jin = require("../assets/images/jin_login.png");
 
 export const Signup: React.FC = () => {
-
+    const valid = new Validations()
     const Navigate = useNavigate();
 
-    const [fname,setFname] = useState<String>('');
-    const [lname,setLname] = useState<String>('');
-    const [email,setEmail] = useState<String>('');
+    const [fname,setFname] = useState<string>('');
+    const [lname,setLname] = useState<string>('');
+    const [email,setEmail] = useState<string>('');
     const [empid,setEmpid] = useState<string>('');
-    const [password,setPassword] = useState<String>('');
-    const [repassword,setRepassword] = useState<String>('');
+    const [password,setPassword] = useState<string>('');
+    const [repassword,setRepassword] = useState<string>('');
+    const data:userdata = {
+        fname:fname,
+        lname:lname,
+        email:email,
+        empid:empid,
+        password:password,
+        repassword:repassword
+    }
+
     
 
     return (
@@ -36,7 +48,7 @@ export const Signup: React.FC = () => {
                             <input type="password" name="pass" id="pass" placeholder="Enter password again*" onChange={(e)=>setRepassword(e.target.value)} required />
 
                         </div>
-                        <button type="button" >Sign Up</button>
+                        <button type="button" onClick={()=>valid.signup(data)} >Sign Up</button>
                         <span onClick={()=>Navigate('/')}>Already a User? Sign-In</span>
                     </div>
 

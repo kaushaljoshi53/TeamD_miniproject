@@ -1,4 +1,4 @@
-import { Apis } from "../services/Apis";
+import { api } from "../services/Apis";
 import { userdata } from "../models/Userdata";
 
 
@@ -6,23 +6,27 @@ import { userdata } from "../models/Userdata";
 
 export class Validations{
 
-    Signup(data:userdata){
+    signup(data:userdata){
 
-        if(data.email === ''||
-            data.empid === ''||
-            data.fname === ''||
-            data.lname === ''||
-            data.password === ''||
-            data.repassword === ''){
+        
+        
+        api.signup(data)
 
-                return ("Enter all the neccesary fields");
-            }
-        else if(data.password !== data.repassword){
-            return("Passwords must match")
-        }
-        else{
+        // if(data.email === ''||
+        //     data.empid === ''||
+        //     data.fname === ''||
+        //     data.lname === ''||
+        //     data.password === ''||
+        //     data.repassword === ''){
 
-        }
+        //         return ("Enter all the neccesary fields");
+        //     }
+        // else if(data.password !== data.repassword){
+        //     return("Passwords must match")
+        // }
+        // else{
+
+        // }
     }
 
 }
