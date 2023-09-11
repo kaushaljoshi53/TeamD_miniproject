@@ -3,7 +3,7 @@ import "../styles/Event.css";
 import axios from "axios";
 
 
-
+// interface
 interface Event {
   event_name: string;
   event_start_date: string;
