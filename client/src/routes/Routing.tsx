@@ -4,6 +4,7 @@ import { Dashboard } from '../pages/Dashboard';
 import { Signup } from '../pages/Singup';
 import { Signin } from '../pages/Signin';
 
+
 export const Routing = ()=>{
     return(
         <Router>
@@ -11,6 +12,7 @@ export const Routing = ()=>{
                 <Route path='/' element={<Signin/>}/>
                 <Route path='/signup' element={<Signup/>}/>
                 <Route path='/dashboard' element={<Dashboard/>}/>
+                
             </Routes>
         </Router>
     )

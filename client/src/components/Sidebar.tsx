@@ -20,28 +20,17 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import MenuIcon from '@mui/icons-material/Menu';
-
+import ImgMediaCard from './publicHoliday';
 
 import '../styles/Sidebar.css'
-
 const jinlogo = require('../assets/images/jin-logo.png')
-
 const drawerWidth = 240;
-
-
-
-
 export default function Sidebar() {
-
-
-
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
-
-
     const menuItems = [
         { text: "Dashboard", icon: <DashboardIcon /> },
         { text: "Timesheet", icon: <AccessTimeIcon /> },
@@ -54,7 +43,6 @@ export default function Sidebar() {
         { text: "Expenses", icon: <ReceiptIcon /> },
         { text: "Resourcing", icon: <PeopleIcon /> },
     ];
-
     const drawer = (
         <div className="Sidebar" style={{ background: "linear-gradient(#19105b, #472067, #7c3375, #FF6196)", height: "100%" }}>
             <div className="header">
@@ -82,8 +70,6 @@ export default function Sidebar() {
             </div>
         </div>
     );
-
-
     return (
         <Box>
             <Drawer
@@ -121,6 +107,8 @@ export default function Sidebar() {
                     color: "whitesmoke",
                     display: { xs: 'block', sm: 'none' }
                 }} />
+                
         </Box>
+       
     );
 }
