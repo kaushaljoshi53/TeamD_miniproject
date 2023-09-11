@@ -1,5 +1,7 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar';
+import Event from '../components/Event';
+import Project from '../components/Project';
 import '../styles/Dashboard.css'
 import { IconButton } from '@mui/material';
 import CakeIcon from '@mui/icons-material/Cake';
@@ -13,6 +15,7 @@ export const Dashboard: React.FC = () => {
 
 
     return (
+        <>
         <div className="Dashboard">
             <div className="Sidebar">
                 <Sidebar />
@@ -34,7 +37,14 @@ export const Dashboard: React.FC = () => {
                         </span>
                     </p>
                 </div>
+                <div className='event'>
+                <Event />
+                </div>
+                <div className='project'>
+                <Project />
+                </div>
             </div>
         </div>
+        </>
     )
 }
