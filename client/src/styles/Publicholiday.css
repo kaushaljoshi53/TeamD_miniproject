@@ -1,0 +1,20 @@
+/* Default styles for larger screens */
+.card {
+  
+    margin-left: 500px;
+    margin-top: -320px;
+    border: 1px solid #151515; 
+    width:340px
+    
+  }
+  
+  /* Media query for screens smaller than a certain width (adjust the width as needed) */
+  @media (max-width: 768px) {
+    .card {
+      margin-left: 25px; /* Remove the left margin */
+      margin-top: 0; /* Reset the top margin */
+     
+     
+    }
+  }
+  

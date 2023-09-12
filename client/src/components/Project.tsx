@@ -21,6 +21,9 @@ interface Project {
 
 export default function BasicAccordion() {
   const [projectData, setProjectData] = useState<Project[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
+
 
 
   useEffect(() => {
@@ -38,6 +41,15 @@ export default function BasicAccordion() {
     fetchProjectData(); // Call the async function when the component mounts
   }, []); // The empty array [] as the second argument makes this effect run only once on mount
 
+
+
+  useEffect(() => {
+    // Filter the project data based on the search query
+    const filtered = projectData.filter((project) =>
+      project.project_name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredProjects(filtered);
+  }, [searchQuery, projectData]);
   return (
     <div className="accordion-container">
       <Accordion className="Project">
@@ -53,6 +65,12 @@ export default function BasicAccordion() {
         <AccordionDetails>
           <Typography>
             <div className="accordion-body">
+            <input
+                type="text"
+                placeholder="Search by Project Name"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
             <div className="table-container">
               <table className="project-table">
                 <thead>
@@ -67,7 +85,7 @@ export default function BasicAccordion() {
                   </tr>
                 </thead>
                 <tbody>
-                  {/* {projectData.map((project) => (
+                  {filteredProjects.map((project) => (
                     <tr key={project.project_id} className="row-highlight">
                       <td>{project.project_id}</td>
                       <td>{project.project_name}</td>
@@ -77,14 +95,23 @@ export default function BasicAccordion() {
                       <td>{project.emp_id}</td>
                       <td>{project.status}</td>
                     </tr>
-                  ))} */}
-                  <td>Id1</td>
+                  ))}
+                  {/* <td>Id1</td>
                   <td>Project1</td>
                   <td>22/09/2023</td>
                   <td>23/10/2023</td>
                   <td>Anu</td>
                   <td>24</td>
                   <td>In-progress</td>
+                </tbody>
+                <tbody>
+                  <td>Id2</td>
+                  <td>Jin</td>
+                  <td>23/09/2023</td>
+                  <td>24/10/2023</td>
+                  <td>Abi</td>
+                  <td>26</td>
+                  <td>Completed</td> */}
                 </tbody>
               </table>
             </div>

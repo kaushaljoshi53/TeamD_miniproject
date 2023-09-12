@@ -20,12 +20,19 @@
     display: flex;
     padding: 1rem;
     font-weight: bold;
-    justify-content: space-between;
+    justify-content: space-between; 
+
 }
+
+.birth{
+    margin-left: 70%;
+}
+
 
 .main .header span{
     margin-top: 8px;
 }
+
 
 @media only screen and (max-width:600px){
     .main{

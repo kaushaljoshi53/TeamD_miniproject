@@ -51,6 +51,9 @@
     margin-top: 100px;
     margin-left: 20px;
   }
+  .button{
+    width:100px
+  }
   
   /* Responsive styles for smaller screens */
   @media (max-width: 768px) {
