@@ -1,0 +1,124 @@
+*{
+    padding: 0;
+}
+
+
+
+@media(max-width:876px){
+    .holder{
+        flex-direction: column;
+    }
+    .img_div{
+        background-image: url('../assets/images/main2logo.png');
+        width:100%;
+        height:50%;
+        /* clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 80% 50%, 0% 50%); */
+    }
+    .form_box{
+        width:50%;
+        margin-top:20px;
+        margin-bottom:40px;
+    }
+}
+
+.form-img{
+    width: 5rem;
+    height:5rem;
+    overflow: hidden;
+    border-radius: 9999px; 
+    margin: auto;
+    position: relative;
+}
+
+.form-img .img-div{
+    position: absolute;
+    bottom: 0; 
+    height: 33.333333%;
+    width: 100%; 
+    text-align: center; 
+    cursor: pointer; 
+    --bg-opacity: 0.8; 
+    width:100%;
+
+}
+
+.img-div p{
+    padding: 0.25rem; 
+    font-size: 0.875rem;
+    line-height: 1.25rem; 
+    color: #ffffff; 
+}
+
+form .insens{
+    margin-top: 0.25rem; 
+    margin-bottom: 0.5rem; 
+    width:100%;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem; 
+    padding-left: 0.5rem;
+    padding-right: 0.5rem; 
+    border-radius: 0.25rem; 
+
+
+}
+
+form .sens{
+    display: flex;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem; 
+    padding-left: 0.5rem;
+    padding-right: 0.5rem; 
+    border-radius: 0.25rem; 
+    margin-top: 0.25rem; 
+    margin-bottom: 0.5rem; 
+}
+
+.btn{
+    width: 100%;
+    background-color: #0077c5;
+    cursor: pointer;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem; 
+    margin-top: 20px; 
+    border-radius: 0.25rem; 
+    font-size: 1.25rem;
+    line-height: 1.75rem; 
+    font-weight: 500; 
+    text-align: center; 
+    color: #ffffff; 
+}
+
+.btn:hover{
+    background-color:#0066c5;
+}
+
+.bilock{
+    display: inline-block; 
+    margin-right: 0.5rem; 
+    font-size: 1.125rem;
+    line-height: 1.75rem; 
+
+
+}
+.span{
+    display: flex;
+    cursor: pointer;
+}
+
+.foot{
+    margin-top: 0.5rem; 
+    font-size: 0.875rem;
+    line-height: 1.25rem; 
+    text-align: left; 
+}
+
+.link{
+    margin-left: 0.25rem; 
+    font-weight: 700; 
+    color: #3B82F6; 
+    text-decoration: underline; 
+}
+
+.link:hover{
+    color: #19105B;
+}

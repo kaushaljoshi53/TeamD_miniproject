@@ -1,0 +1,51 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.Dashboard{
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+.main{
+    margin-left: 240px;
+    height: 100%;
+    width: 100%;
+}
+.main .header{
+    color: #19105B;
+    display: flex;
+    padding: 1rem;
+    font-weight: bold;
+    justify-content: space-between;
+}
+
+.main .header span{
+    margin-top: 8px;
+}
+
+@media only screen and (max-width:600px){
+    .main{
+        margin: 0;
+    }
+
+
+    .main .header{
+        background-color: #19105B;
+        color: whitesmoke;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .main .header p{
+        display: none;
+    }
+    
+    
+}
