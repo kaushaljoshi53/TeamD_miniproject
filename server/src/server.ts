@@ -1,24 +1,18 @@
-import express from "express";
-import http from "http";
-import cors from "cors";
-import router from "./routes/Router";
+import  dotenv  from 'dotenv';
+import Express from "express";
+import cors from 'cors';
+import http from 'http';
 
-
-const app = express();
-app.use(cors())
-app.use(express.json());
-app.use(router)
-
-
-
-
+const app = Express();
+app.use(cors());
+app.use(Express.json())
 const httpServer = http.createServer(app)
 
-const PORT = process.env.PORT || 8080
-httpServer.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+dotenv.config()
+const PORT = process.env.PORT || 8080;
+
+
+httpServer.listen(PORT,()=>{
+    console.log(`Server running on port - ${PORT}`);
 })
-
-httpServer
-
 
