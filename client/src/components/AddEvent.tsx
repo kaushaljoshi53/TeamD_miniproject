@@ -6,6 +6,8 @@ const AddEvent: React.FC = () => {
     const [isProjectVisible, setIsProjectVisible] = useState(false);
 
 
+
+
     // Define state for form fields here
     const [eventName, setEventName] = useState("");
     const [eventDate, setEventDate] = useState("");
@@ -20,8 +22,8 @@ const AddEvent: React.FC = () => {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [teamLeader, setTeamLeader] = useState("");
-    const [teamMembers, setTeamMembers] = useState<any>([]);
-    const [newTeamMember, setNewTeamMember] = useState('');
+    const [teamMembers, setTeamMembers] = useState<string[]>([]);
+    const [newTeamMember, setNewTeamMember] = useState<string>('');
     const [status, setStatus] = useState("");
 
 
@@ -79,12 +81,12 @@ const AddEvent: React.FC = () => {
     };
 
     const addTeamMember = () => {
-        setTeamMembers([...teamMembers, newTeamMember]);
-        setNewTeamMember(''); // Reset the input field
+        const updatedTeamMembers = [...teamMembers, newTeamMember];
+        setTeamMembers(updatedTeamMembers);
+        setNewTeamMember('');
     };
 
-
-    const deleteTeamMember = (index: any) => {
+    const deleteTeamMember = (index: number) => {
         const updatedTeamMembers = [...teamMembers];
         updatedTeamMembers.splice(index, 1);
         setTeamMembers(updatedTeamMembers);
@@ -205,7 +207,7 @@ const AddEvent: React.FC = () => {
             {isProjectVisible && (
 
                 <div className="form-container">
-                    console.log(teamMembers)
+                    
                     <div className="close-button" onClick={handleCloseForms}>
                         <span className="close-mark">&times;</span>
                     </div>
@@ -245,20 +247,23 @@ const AddEvent: React.FC = () => {
                             />
                         </div>
 
+
+                        <div className="form-group">
+                            <label htmlFor="teamLeaders">Team Leader:</label>
+                            <input
+                                type="text"
+                                id="teamLeaders"
+                                name="teamLeaders"
+                                value={teamLeader}
+                                onChange={(e) => setTeamLeader(e.target.value)}
+                            />
+                        </div>
                         <div>
-                            <div className="form-group">
-                                <label htmlFor="teamLeaders">Team Leader:</label>
-                                <input
-                                    type="text"
-                                    id="teamLeaders"
-                                    name="teamLeaders"
-                                    value={teamLeader}
-                                    onChange={(e) => setTeamLeader(e.target.value)}
-                                />
-                            </div>
-                            {teamMembers.map((member: string, index: any) => (
-                                <div className="form-group">
+                            {teamMembers.map((member: string, index: number) => (
+                                <div className="form-group" key={index}>
+                                    
                                     <label htmlFor={`teamMember${index}`}>Team Member:</label>
+                                    <div className="input-button-container">
                                     <input
                                         type="text"
                                         id={`teamMember${index}`}
@@ -272,31 +277,40 @@ const AddEvent: React.FC = () => {
                                     />
                                     <button onClick={() => deleteTeamMember(index)}>Delete</button>
                                 </div>
+                                </div>
                             ))}
                             <div className="form-group">
                                 <label htmlFor="newTeamMember">Add Member:</label>
+                                <div className="input-button-container">
                                 <input
+                                
                                     type="text"
                                     id="newTeamMember"
                                     name="newTeamMember"
                                     value={newTeamMember}
                                     onChange={(e) => setNewTeamMember(e.target.value)}
                                 />
-                                <button onClick={addTeamMember}>+</button>
+                                <button className="butonclr" type="button"   onClick={addTeamMember}>+</button>
+                            </div>
                             </div>
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="Status">Status:</label>
-                            <textarea
-                                id="Status"
-                                name="Status"
+                            <label htmlFor="Projectstatus">Project Status:</label>
+                            <select
+                                id="Projectstatus"
+                                name="Projectstatus"
                                 value={status}
                                 onChange={(e) => setStatus(e.target.value)}
-                            />
+                            >
+                                <option className="values" value="">Select an option</option>
+                                <option className="values" value="On Meeting">Inprogress</option>
+                                <option className="values" value="Tidel Conference Hall">Completed</option>
+
+                            </select>
                         </div>
 
-                        <button className="add-event-button" type="submit">
+                        <button className="add-event-button" type="submit" onClick={handleSubmit} >
                             Submit
                         </button>
                     </form>

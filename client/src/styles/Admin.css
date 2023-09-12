@@ -1,4 +1,4 @@
-/* Navbar.css */
+Navbar.css
 .Dashboard {
     display: flex;
     height: 100vh;
@@ -33,19 +33,7 @@
     padding-left: 10px;
 
   }
-  .body {
-    flex: 1;
-    margin-left: 15px;
-  }
-  .Optionlist {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  .Optionlist li {
-    padding: 5px;
-    cursor: pointer;
-  }
+
   .footer {
     padding-bottom: 20px;
     display: flex;
@@ -132,15 +120,16 @@
 
 
   .form-container {
-    color: #19105b;
+    color: #6a6c71;
     display: flex;
     flex-direction: column;
-    border: 1px solid #FF6196;
-    background: rgb(170, 159, 231);
+    
+    background:#FFE5EE;
     max-width: 400px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 50px;
     margin-top: 40px;
+    margin-right: 750px;
   }
   
   .form-group {
@@ -178,6 +167,11 @@
   
   .form-container {
     position: relative;
+  }
+  .formdetails{
+    text-size-adjust: 10px;
+    flex-direction: column;
+    align-items: center;
   }
   
   .close-button {
@@ -240,7 +234,18 @@
   /* Customize other styles as needed */
   
   
-  
+  .input-button-container {
+    display: flex;
+    align-items: center; /* Vertically center items */
+}
+
+.input-button-container input {
+    flex: 1; /* Allow the input to grow and fill available space */
+    margin-right: 10px; /* Add some space between input and button */
+}
+.butonclr{
+  width: 30px;
+}
 
   
   
