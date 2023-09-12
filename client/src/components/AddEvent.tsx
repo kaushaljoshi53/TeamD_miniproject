@@ -4,14 +4,14 @@ import '../styles/Admin.css'
 const AddEvent: React.FC = () => {
     const [isFormVisible, setIsFormVisible] = useState(false);
     const [isProjectVisible, setIsProjectVisible] = useState(false);
-    
+
 
     // Define state for form fields here
     const [eventName, setEventName] = useState("");
     const [eventDate, setEventDate] = useState("");
     const [eventendDate, setEventendDate] = useState("");
     const [eventtime, setEventtime] = useState("");
-    const [eventendtime,setEventendtime]=useState("");
+    const [eventendtime, setEventendtime] = useState("");
     const [eventorganize, setEventorganize] = useState("");
     const [eventVenue, setEventVenue] = useState("");
 
@@ -19,11 +19,15 @@ const AddEvent: React.FC = () => {
     const [projectName, setProjectName] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
-    const [teamMembers, setTeamMembers] = useState("");
-    const [projectDescription, setProjectDescription] = useState("");
+    const [teamLeader, setTeamLeader] = useState("");
+    const [teamMembers, setTeamMembers] = useState<any>([]);
+    const [newTeamMember, setNewTeamMember] = useState('');
+    const [status, setStatus] = useState("");
 
-    const [eventsList, setEventsList] = useState<any[]>([]); 
-    
+
+
+
+
 
     const toggleFormVisibility = () => {
         setIsFormVisible(!isFormVisible);
@@ -61,39 +65,33 @@ const AddEvent: React.FC = () => {
             setProjectName("");
             setStartDate("");
             setEndDate("");
-            setTeamMembers("");
-            setProjectDescription("");
+            setTeamLeader("");
+            setTeamMembers([]);
+            setStatus("");
+
         }
     }, [isFormVisible]);
     const currentDate = new Date().toISOString().split('T')[0];
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Collect the event data from state
-        const eventData = {
-            eventName,
-            eventDate,
-            eventendDate,
-            eventtime,
-            eventendtime,
-            eventorganize,
-            eventVenue,
-        };
 
-        // Add the event data to the eventsList array
-        setEventsList([...eventsList, eventData]);
 
-        // Clear the form fields after submission
-        setEventName("");
-        setEventDate("");
-        setEventendDate("");
-        setEventtime("");
-        setEventendtime("");
-        setEventorganize("");
-        setEventVenue("");
+    };
+
+    const addTeamMember = () => {
+        setTeamMembers([...teamMembers, newTeamMember]);
+        setNewTeamMember(''); // Reset the input field
     };
 
 
-    // Similarly, you can add another useEffect for the project form
+    const deleteTeamMember = (index: any) => {
+        const updatedTeamMembers = [...teamMembers];
+        updatedTeamMembers.splice(index, 1);
+        setTeamMembers(updatedTeamMembers);
+    };
+
+
+
 
     return (
         <div className="RightSide">
@@ -107,7 +105,7 @@ const AddEvent: React.FC = () => {
                         <span className="close-mark">&times;</span>
                     </div>
                     <form>
-                    
+
                         <div className="form-group">
                             <label htmlFor="eventName">Event Name:</label>
                             <input
@@ -140,7 +138,7 @@ const AddEvent: React.FC = () => {
                                 value={endDate}
                                 onChange={(e) => setEndDate(e.target.value)}
                                 min={currentDate}
-                               
+
                             />
                         </div>
 
@@ -165,7 +163,7 @@ const AddEvent: React.FC = () => {
                                 onChange={(e) => setEventendtime(e.target.value)}
                             />
                         </div>
-                         
+
                         <div className="form-group">
                             <label htmlFor="eventType">Event Type (Optional):</label>
                             <select
@@ -174,14 +172,14 @@ const AddEvent: React.FC = () => {
                                 value={eventorganize}
                                 onChange={(e) => setEventorganize(e.target.value)}
                             >
-                                <option className="values"  value="">Select an option</option>
+                                <option className="values" value="">Select an option</option>
                                 <option className="values" value="On Meeting">On Meeting</option>
                                 <option className="values" value="Tidel Conference Hall">Tidel Conference Hall</option>
-                              
+
                             </select>
                         </div>
 
-                    
+
 
 
                         <div className="form-group">
@@ -195,51 +193,19 @@ const AddEvent: React.FC = () => {
                             />
                         </div>
 
-                      
+
                         <button className="add-event-button" type="submit" onClick={handleSubmit} >
                             Submit
                         </button>
                     </form>
                 </div>
-                
+
             )}
-             <div className="events-list">
-                <h2>List of Events:</h2>
-                <div className="column-list">
-  <ul>
-    {eventsList.map((event, index) => (
-      <li key={index} className="event-item">
-        <div className="event-info">
-          <strong>Event Name:</strong> {event.eventName}
-        </div>
-        <div className="event-info">
-          <strong>Event Date:</strong> {event.eventDate}
-        </div>
-        <div className="event-info">
-          <strong>Event End Date:</strong> {event.eventendDate}
-        </div>
-        <div className="event-info">
-          <strong>Event Time:</strong> {event.eventtime}
-        </div>
-        <div className="event-info">
-          <strong>Event End Time:</strong> {event.eventendtime}
-        </div>
-        <div className="event-info">
-          <strong>Event Type:</strong> {event.eventorganize}
-        </div>
-        <div className="event-info">
-          <strong>Event Venue:</strong> {event.eventVenue}
-        </div>
-      </li>
-    ))}
-  </ul>
-</div>
-
-
-            </div>
 
             {isProjectVisible && (
+
                 <div className="form-container">
+                    console.log(teamMembers)
                     <div className="close-button" onClick={handleCloseForms}>
                         <span className="close-mark">&times;</span>
                     </div>
@@ -279,24 +245,54 @@ const AddEvent: React.FC = () => {
                             />
                         </div>
 
-                        <div className="form-group">
-                            <label htmlFor="teamMembers">Team Leader:</label>
-                            <input
-                                type="text"
-                                id="teamMembers"
-                                name="teamMembers"
-                                value={teamMembers}
-                                onChange={(e) => setTeamMembers(e.target.value)}
-                            />
+                        <div>
+                            <div className="form-group">
+                                <label htmlFor="teamLeaders">Team Leader:</label>
+                                <input
+                                    type="text"
+                                    id="teamLeaders"
+                                    name="teamLeaders"
+                                    value={teamLeader}
+                                    onChange={(e) => setTeamLeader(e.target.value)}
+                                />
+                            </div>
+                            {teamMembers.map((member: string, index: any) => (
+                                <div className="form-group">
+                                    <label htmlFor={`teamMember${index}`}>Team Member:</label>
+                                    <input
+                                        type="text"
+                                        id={`teamMember${index}`}
+                                        name={`teamMember${index}`}
+                                        value={member}
+                                        onChange={(e) => {
+                                            const updatedTeamMembers = [...teamMembers];
+                                            updatedTeamMembers[index] = e.target.value;
+                                            setTeamMembers(updatedTeamMembers);
+                                        }}
+                                    />
+                                    <button onClick={() => deleteTeamMember(index)}>Delete</button>
+                                </div>
+                            ))}
+                            <div className="form-group">
+                                <label htmlFor="newTeamMember">Add Member:</label>
+                                <input
+                                    type="text"
+                                    id="newTeamMember"
+                                    name="newTeamMember"
+                                    value={newTeamMember}
+                                    onChange={(e) => setNewTeamMember(e.target.value)}
+                                />
+                                <button onClick={addTeamMember}>+</button>
+                            </div>
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="projectDescription">Description:</label>
+                            <label htmlFor="Status">Status:</label>
                             <textarea
-                                id="projectDescription"
-                                name="projectDescription"
-                                value={projectDescription}
-                                onChange={(e) => setProjectDescription(e.target.value)}
+                                id="Status"
+                                name="Status"
+                                value={status}
+                                onChange={(e) => setStatus(e.target.value)}
                             />
                         </div>
 

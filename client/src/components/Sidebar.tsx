@@ -56,7 +56,7 @@ export default function Sidebar() {
     ];
 
     const drawer = (
-        <div className="Sidebar" style={{ background: "linear-gradient(#19105b, #472067, #7c3375, #FF6196)", height: "100%" }}>
+        <div className="Sidebar" style={{ background: "linear-gradient(#19105b, #472067, #7c3375, #FF6196)", height: "100%",overflow:"hidden" }}>
             <div className="header">
                 <img src={jinlogo} alt="" style={{ marginTop: 15, marginLeft: 15 }} />
 

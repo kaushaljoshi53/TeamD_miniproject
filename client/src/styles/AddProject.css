@@ -1,0 +1,195 @@
+/* Project.css */
+
+ 
+
+/* ... (previous styles) */
+
+ 
+
+.project-table {
+
+    width: 100%;
+
+    margin-top: 10px;
+
+    border-collapse: collapse; /* Remove spacing between table cells */
+
+  }
+
+ 
+
+  .project-table th,
+
+  .project-table td {
+
+    border: 1px solid #ddd;
+
+    text-align: left;
+
+    padding: 8px; /* Add padding to table cells */
+
+    border-style: none; /* Remove individual cell borders */
+
+    border-top: 1px solid #ddd; /* Add border to top of each cell */
+
+  }
+
+ 
+
+  .project-table th {
+
+    background-color: #f2f2f2;
+
+    font-weight: bold;
+
+  }
+
+ 
+
+  .project-table tr:nth-child(even) {
+
+    background-color: #e0e0e0;
+
+  }
+
+ 
+
+  .row-highlight {
+
+    background-color: #e0e0e0;
+
+  }
+
+ 
+
+  .project_header {
+
+    background-color: #19105b;
+
+    width: 99%;
+
+    height: 45px;
+
+    color: white;
+
+    padding: 5px;
+
+
+  }
+
+ 
+
+  .expand-icon {
+
+    color: white;
+
+  }
+
+ 
+
+  .Project {
+
+    width: 90%;
+    
+
+  }
+
+  .plus-icon{
+  margin-left: 750px;
+  }
+
+ 
+
+  .accordion-container {
+
+    position: static;
+
+    margin-top: 100px;
+
+    margin-left: 250px;
+
+  }
+
+ 
+
+  /* Responsive styles for smaller screens */
+
+  @media (max-width: 768px) {
+
+    .Project {
+
+      width: 95%;
+
+    }
+
+ 
+
+    .accordion-container {
+
+      margin-top: 10px;
+
+      margin-left: 20px;
+
+    }
+
+ 
+
+    .project-table {
+
+      font-size: 12px;
+
+      overflow-x: auto; /* Add horizontal scroll for table */
+
+      display: block; /* Make table display as a block element */
+
+    }
+
+ 
+
+    .project_header {
+
+      padding-bottom: 15px;
+
+      font-size: 13px;
+
+      height: 30px; /* Reduce header height */
+
+    }
+
+ 
+
+    .expand-icon {
+
+      font-size: 24px;
+
+    }
+
+ 
+
+    .row-highlight {
+
+      background-color: transparent;
+
+    }
+
+ 
+
+    /* Allow table cells to wrap text */
+
+    .project-table th,
+
+    .project-table td {
+
+      white-space: nowrap;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
+      padding: 5px; /* Add padding for small screens */
+
+    }
+
+  }
+
+ 
