@@ -66,20 +66,20 @@ export default function BasicAccordion() {
   }, []);
 
 
-  useEffect(() => {
-    // Define an async function to fetch the data from your server
-    async function fetchProjectData() {
-      try {
-        const response = await axios.get('http://localhost:8081/api/projects'); // Replace with your API endpoint
-        const data = response.data;
-        setProjectData(data); // Update the state with the fetched data
-      } catch (error) {
-        console.error('Error fetching project data:', error);
-      }
+  // useEffect(() => {
+  //   // Define an async function to fetch the data from your server
+  //   async function fetchProjectData() {
+  //     try {
+  //       const response = await axios.get('http://localhost:8081/api/projects'); // Replace with your API endpoint
+  //       const data = response.data;
+  //       setProjectData(data); // Update the state with the fetched data
+  //     } catch (error) {
+  //       console.error('Error fetching project data:', error);
+  //     }
 
-    }
-    fetchProjectData(); // Call the async function when the component mounts
-  }, []); // The empty array [] as the second argument makes this effect run only once on mount
+  //   }
+  //   fetchProjectData();
+  // }, []); 
   return (
     <div className="accordion-container">
       <Accordion className="Project">
