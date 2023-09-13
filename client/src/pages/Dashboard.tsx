@@ -24,9 +24,9 @@ export const Dashboard: React.FC = () => {
       birthdate: Date;
     };
     const birthdays:Person[]= [
-      { name: 'Kaushal', designation: 'Developer', birthdate: new Date(2000, 8, 12) },
-      { name: 'Vivek', designation: 'Designer', birthdate: new Date(1995, 3, 15) },
-      {name:'Romika',designation:'softwareEngineer',birthdate:new Date(2002,9,8)},
+      { name: 'Kaushal', designation: 'Developer', birthdate: new Date(2000, 8, 13) },
+      { name: 'Vivek', designation: 'Designer', birthdate: new Date(1995, 8, 13) },
+      {name:'Romika',designation:'softwareEngineer',birthdate:new Date(2002,8,13)},
       {name:'Divya',designation:'software intern',birthdate:new Date(2003,8,8)},
       {name:'Vishal',designation:'software intern',birthdate:new Date(2003,8,8)},
       {name:'Thirulogachander',designation:'software intern',birthdate:new Date(2003,8,8)},
@@ -52,28 +52,33 @@ export const Dashboard: React.FC = () => {
             <div className="main">
                 <div className="header">
                     <h2>Dashboard</h2>
-                    {/* <p className='bday'>
+                    <p className='bday'>
+                        <div className='iconbday'>
                         <span>
                             {today}
                         </span>
+
                      <div className='bold'>
-                        <span>
+                        <span className='icon'>
                         <IconButton onClick={toggleBirthday} id="bday" className='dob'>
                            <CakeIcon sx={{
                            color: "#19105B",
                           transform: "translateY(-5px)",
+                          maxWidth:"100px"
                             }} />
                        </IconButton>
                         </span> 
-                        </div>  
+                        </div> 
+                        </div>
                         <div className="dob">
                        
                             {isBirthdayIconClicked ? (
                                 todayBirthdays.length > 0 ? (
                                     <div className="birthday-card-container">
+                                       <Card className="birthday-card" style={{ maxWidth: '400px', height: '150px' , overflow:"scroll", overflowX:"hidden" }}>
+                                        <div className='bday-header'>Today's Birthday</div>
                                     {todayBirthdays.map((person, index) => (
-                                       <Card key={index} className="birthday-card" style={{ width: '300px', height: '200px' }}>
-                                       <CardContent>
+                                       <CardContent key={index}>
                                            <div className="profile-container">
                                                <img src="assets/images/profile.png" alt="profile" style={{ maxWidth: 50 }} />
                                                <div className="details">
@@ -84,21 +89,33 @@ export const Dashboard: React.FC = () => {
                                                </div>
                                           </div>
                                        </CardContent>
+                                        ))}
                                    </Card>
-                                    ))}
+                                   
 
                                 </div>
                                 ) : (
-                                    <div>
-                                        <h2 className='moving-text'>Today's Birthday</h2>
-                                    <p>No Cakes and Candles.</p>
-                                    </div>
+                                    <Card className="birthday-card" style={{ maxWidth: '900px' }}>
+
+                                    <CardContent>
+    
+                                        <div>
+    
+                                            <h2 className='moving-text'>Today's Birthday</h2>
+    
+                                            <p>No Cakes and Candles.</p>
+    
+                                        </div>
+    
+                                    </CardContent>
+    
+                                </Card>
                                 )
                             ) : null} 
                         </div>        
-                    </p> */}
+                    </p>
                 </div>
-                <div className='birth'>
+                {/* <div className='birth'>
                 <p className='bday'>
                         <span>
                             {today}
@@ -144,7 +161,7 @@ export const Dashboard: React.FC = () => {
                             ) : null} 
                         </div>        
                     </p>
-                </div>
+                </div> */}
                 <div className='event'>
                     <Event />
                     <div className='holiday'>

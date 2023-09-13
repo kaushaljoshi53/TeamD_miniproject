@@ -6,27 +6,31 @@
 
 }
 
+.bday
+
+{
+
+   
+
+height:50px;
+
  
-
-.birthday-icon {
-
-  cursor: pointer;
-
-  transition: color 0.3s;
-
-  padding-right:50px;/* Add padding to the right */
-
-  padding-top:30px; /* Add padding to the top */
 
 }
 
- 
+.birthday-card-container
+
+{
+
+   
+
+    margin-top: 30px;
+
+}
 
 .profile-card {
 
-  position: absolute;
-
-  top: 50px; /* Adjust the positioning as needed */
+  top: 50px;
 
   right:60px;
 
@@ -36,21 +40,13 @@
 
   padding-right: 50px;
 
-  width:200px;/* You need to specify the unit, e.g., 'px' or 'rem' */
-
-  height: max-content;
-
-}
-
- 
-
-.birthday-container:hover .profile-card {
-
-  display: block; /* Display the profile card on hover */
+  overflow: scroll;
 
 }
 
 .username
+
+ 
 
 {
 
@@ -63,6 +59,8 @@
   padding-left:10px;
 
 }
+
+ 
 
 .names{
 
@@ -88,8 +86,6 @@
 
 }
 
- 
-
 .profileImage
 
 {
@@ -99,8 +95,6 @@
   justify-content: flex-start;
 
 }
-
- 
 
 .profiletitle
 
@@ -115,19 +109,18 @@
   display: flex;
 
   align-items: center;
+
   max-height: 100px;
 
-}
-
  
+
+}
 
 .profile-container img {
 
   margin-right: 10px; /* Adjust margin as needed */
 
 }
-
- 
 
 .details {
 
@@ -136,8 +129,6 @@
   flex-direction: column;
 
 }
-
- 
 
 .name {
 
@@ -151,6 +142,22 @@
 
 }
 
- 
+.iconbday
+
+{
+
+    display: flex;
+
+    justify-content: end;
+
+}
+
+.icon
+
+{
+
+    padding-left: 10px;
+
+}
 
  

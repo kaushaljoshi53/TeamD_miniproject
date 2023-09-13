@@ -14,6 +14,7 @@
   background-color: #19105b;
   color: white;
   padding: 10px;
+
   text-align: center;
   font-size: small;
   font-family: Arial, Helvetica, sans-serif;
@@ -59,8 +60,13 @@ button {
   background-color: #FF6196;
   margin-top: 25px;
 }
+.addingevents{
+ margin-left: 300px;
+ font-size: 20px;
+ cursor: pointer;
 
 
+}
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;

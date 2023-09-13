@@ -80,7 +80,6 @@ export default function BasicAccordion() {
                     <th>Start_Date</th>
                     <th>End_Date</th>
                     <th>Team_Leader</th>
-                    <th>Emp_Id</th>
                     <th>Status</th>
                   </tr>
                 </thead>
@@ -92,7 +91,6 @@ export default function BasicAccordion() {
                       <td>{project.start_date}</td>
                       <td>{project.end_date}</td>
                       <td>{project.team_leader}</td>
-                      <td>{project.emp_id}</td>
                       <td>{project.status}</td>
                     </tr>
                   ))}
