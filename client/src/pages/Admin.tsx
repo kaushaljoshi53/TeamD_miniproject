@@ -12,7 +12,7 @@ export const Admin: React.FC = () => {
     return (
         <>
         <Sidebar/>
-        <AddEvent/>
+       
         <AddProject/>
         </>
     
