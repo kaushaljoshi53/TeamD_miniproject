@@ -28,20 +28,13 @@
 }
 
 .signup .main .form{
-    margin: 25%;
+    margin: 15% 25% ;
 }
 .signup .main .form .inputs{
     margin-top: 1rem;
 
 }
-.signup .main .form .inputs input{
-    width: 85%;
-    padding: 1rem 2rem;
-    margin: 1%;
-    background-color:#F7F9FB;
-    border-radius: 5px;
-    border: none;
-}
+
 .signup .main .form .inputs button{
     background-color: #19015B;
     color: whitesmoke;
@@ -72,10 +65,11 @@
     .signup .bg{
         background: linear-gradient(#084D63, #020F14);
         width:100%;
-        height:35.5%
+        height:25%
     }
     .signup .bg img{
         width:50%;
+        margin-top: 10%;
         margin-left: 22%;
     }
     .signup .main{
@@ -88,14 +82,14 @@
     }
 
 
-    .signup .main .form .inputs input{
+    /* .signup .main .form .inputs input{
         padding: 0.8rem 1rem;
         border: none;
         width: 85%;
         margin: 2% 0;
         background-color: #F7F9FB;
         border-radius: 5px ;
-    }
+    } */
 
     .signup .main .form .inputs button{
         background-color: #19015B;

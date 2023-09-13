@@ -3,10 +3,10 @@ import { sequelizeObj } from "../database/dbConnect";
 
 class User extends Model{
 
-    public firstname!: string;
-    public lastname!:string;
+    public firstName!: string;
+    public lastName!:string;
     public email!:string;
-    public empId!:string;
+    public employeeId!:string;
     public designation!:string;
     public password!:string;
     public image!:Buffer|null;
@@ -20,11 +20,11 @@ class User extends Model{
 
 User.init(
     {
-        firstname:{
+        firstName:{
             type:DataTypes.STRING,
             allowNull:false
         },
-        lastname:{
+        lastName:{
             type:DataTypes.STRING,
             allowNull:false
         },
@@ -32,7 +32,7 @@ User.init(
             type:DataTypes.STRING,
             allowNull:false
         },
-        empId:{
+        employeeId:{
             type:DataTypes.STRING,
             allowNull:false
         },

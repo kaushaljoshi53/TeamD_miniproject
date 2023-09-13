@@ -1,8 +1,8 @@
 export interface userdata{
-    fname:string;
-    lname:string;
+    firstName:string;
+    lastName:string;
     email:string;
-    empid:string;
+    employeeId:string;
     password:string;
-    repassword:string;
+    rePassword:string;
 }

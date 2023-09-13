@@ -7,7 +7,9 @@ dotenv.config()
 
 class controllers{
 
-    public hasNullValues(data:any):boolean{
+    public static hasNullValues(data:any):boolean{
+        console.log("asdsad",data);
+        
         for (const key in data){
             if (data[key] === null){
                 return true;
@@ -21,13 +23,13 @@ class controllers{
         return false
     }
 
-    public async userExists(email:string, empId:string):Promise<{email:boolean,empId:boolean}>{
+    public static async userExists(email:string, employeeId:string):Promise<{email:boolean,employeeId:boolean}>{
 
         try {
             const emailExists = await User.findOne({where:{email:email}});
-            const empidExist = await User.findOne({where:{empId:empId}});
+            const employeeIdExist = await User.findOne({where:{employeeId:employeeId}});
 
-            return {email:!!emailExists, empId:!!empId}
+            return {email:!!emailExists, employeeId:!!employeeIdExist}
 
 
         } catch (error) {
@@ -37,20 +39,23 @@ class controllers{
     }
 
     public  async signup(req:Request, res:Response){
+
+        
         try {
             const data = req.body;
-            if (this.hasNullValues(data)) {
+            
+            if (controllers.hasNullValues(data)) {
                 res.status(400).json({message:"Bad request! Has some null values."});
             }
             else {
-                const user_check = await this.userExists(data.email,data.empId);
-                if (user_check.email && user_check.empId){
+                const user_check = await controllers.userExists(data.email,data.employeeId);
+                if (user_check.email && user_check.employeeId){
                     res.status(409).json({message:"User with email and empId already exists."});
                 }
                 else if (user_check.email){
                     res.status(409).json({message:"User with email already exists."});
                 }
-                else if (user_check.empId){
+                else if (user_check.employeeId){
                     res.status(409).json({message:"User with empId already exists"});
                 }
                 else{
@@ -73,6 +78,7 @@ class controllers{
                     else{
                         res.status(500).json({message:"User registration failed."});
                     }
+                    
                 }
             }
                         
