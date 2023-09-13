@@ -47,11 +47,11 @@
 .signup .main .form .inputs button:hover{
     cursor: pointer;
 }
-.signup .main .form .inputs span{
+.signup .main .form .inputs #signin{
     color:#19015B;
     margin-left: 2%;
 }
-.signup .main .form .inputs span:hover{
+.signup .main .form .inputs #signin:hover{
     cursor: pointer;
     text-decoration: underline;
 }

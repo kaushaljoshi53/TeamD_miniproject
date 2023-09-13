@@ -30,11 +30,13 @@ User.init(
         },
         email:{
             type:DataTypes.STRING,
-            allowNull:false
+            allowNull:false,
+            primaryKey:true,
         },
         employeeId:{
             type:DataTypes.STRING,
-            allowNull:false
+            allowNull:false,
+            unique:true
         },
         designation:{
             type:DataTypes.STRING,

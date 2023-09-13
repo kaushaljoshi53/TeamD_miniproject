@@ -3,15 +3,9 @@
 import React, { useState } from "react";
 import "../styles/Signup.css";
 import { useNavigate } from "react-router-dom";
-import { TextField, Button } from "@mui/material";
-import {
-  validateEmail,
-  validateEmployeeID,
-  validatePassword,
-  validateRepassword,
-  validateName,
-  Validations
-} from "../validations/Validation"; // Import validation functions
+import { TextField, Button, InputAdornment } from "@mui/material";
+import {userDataValidations} from "../utils/userDataValidation"; // Import validation functions
+import {signUpRealTime} from "../utils/realTimeValidation";
 import { userdata } from "../models/Userdata";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -40,32 +34,32 @@ export const Signup: React.FC = () => {
   // Handle validations in real-time
   const handleFirstNameChange = (val: string) => {
     setFirstName(val);
-    setFormErrors({ ...formErrors, firstName: validateName(val) });
+    setFormErrors({ ...formErrors, firstName: signUpRealTime.validateName(val) });
   };
 
   const handleLastNameChange = (val: string) => {
     setLastName(val);
-    setFormErrors({ ...formErrors, lastName: validateName(val) });
+    setFormErrors({ ...formErrors, lastName: signUpRealTime.validateName(val) });
   };
 
   const handleEmailChange = (val: string) => {
     setEmail(val);
-    setFormErrors({ ...formErrors, email: validateEmail(val) });
+    setFormErrors({ ...formErrors, email: signUpRealTime.validateEmail(val) });
   };
 
   const handleEmployeeIdChange = (val: string) => {
     setEmployeeId(val);
-    setFormErrors({ ...formErrors, employeeId: validateEmployeeID(val) });
+    setFormErrors({ ...formErrors, employeeId: signUpRealTime.validateEmployeeID(val) });
   };
 
   const handlePasswordChange = (val: string) => {
     setPassword(val);
-    setFormErrors({ ...formErrors, password: validatePassword(val) });
+    setFormErrors({ ...formErrors, password: signUpRealTime.validatePassword(val) });
   };
 
   const handleRePasswordChange = (val: string) => {
     setRePassword(val);
-    setFormErrors({ ...formErrors, rePassword: validateRepassword(password, val) });
+    setFormErrors({ ...formErrors, rePassword: signUpRealTime.validateRepassword(password, val) });
   };
 
   // Handle form submission
@@ -76,13 +70,17 @@ export const Signup: React.FC = () => {
       email: email,
       employeeId: employeeId,
       password: password,
-      rePassword: rePassword
     }
-    const message = await Validations.signup(data) || '';
+
+    
+    const message = await userDataValidations.signup(data,rePassword) || '';
+
+
     if (message !== 'User registered successfully') {
       toast.error(message);
     } else {
       toast.success("Sign up successful!"); // You can customize this message
+      navigate('/')
     }
 
   };
@@ -99,7 +97,7 @@ export const Signup: React.FC = () => {
           <div className="inputs">
             <div className="name">
               <TextField
-                label="First Name*"
+                label="First Name"
                 size="small"
                 fullWidth
                 value={firstName}
@@ -122,7 +120,7 @@ export const Signup: React.FC = () => {
             </div>
             <div className="credentials">
               <TextField
-                label="Email*"
+                label="Email"
                 size="small"
                 fullWidth
                 value={email}
@@ -133,7 +131,7 @@ export const Signup: React.FC = () => {
                 helperText={formErrors.email}
               />
               <TextField
-                label="Employee ID*"
+                label="Employee ID"
                 size="small"
                 fullWidth
                 value={employeeId}
@@ -142,9 +140,12 @@ export const Signup: React.FC = () => {
                 style={{ marginBottom: 10 }}
                 error={!!formErrors.employeeId}
                 helperText={formErrors.employeeId}
+                InputProps={{
+                  startAdornment: <InputAdornment position="start">JMD</InputAdornment>,
+                }}
               />
               <TextField
-                label="Password*"
+                label="Password"
                 size="small"
                 fullWidth
                 type="password"
@@ -156,7 +157,7 @@ export const Signup: React.FC = () => {
                 helperText={formErrors.password}
               />
               <TextField
-                label="Re-enter Password*"
+                label="Re-enter Password"
                 size="small"
                 fullWidth
                 type="password"
@@ -176,7 +177,7 @@ export const Signup: React.FC = () => {
             >
               Sign Up
             </Button>
-            <span onClick={() => navigate("/")}>Already a User? Sign-In</span>
+            <span>Already a User?<span id="signin" onClick={() => navigate("/")}> Sign-In</span></span>
           </div>
         </div>
       </div>

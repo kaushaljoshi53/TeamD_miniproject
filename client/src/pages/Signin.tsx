@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import '../styles/Signin.css'
+import { TextField } from "@mui/material";
 
 const jin = require("../assets/images/jin_login.png")
 
-
 export const Signin = () => {
+    const Navigate = useNavigate();
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
 
-    const Navigate = useNavigate()
+    const handleEmailChange = (value:string) => {
+        setEmail(value);
+    };
+
+    const handlePasswordChange = (value:string) => {
+        setPassword(value);
+    };
+
+    const handleSignIn = () => {
+
+        Navigate('/dashboard');
+    };
 
     return (
         <div className="Signin">
@@ -18,9 +32,25 @@ export const Signin = () => {
                 <div className="form">
                     <h2>Sign In</h2>
                     <div className="inputs">
-                        <input type="text" placeholder='Email*' />
-                        <input type="text" placeholder='Password*' />
-                        <button type="button">Sign In</button>
+                        <TextField
+                            label="Email*"
+                            size="small"
+                            fullWidth
+                            value={email}
+                            onChange={(e) => handleEmailChange(e.target.value)}
+                            required
+                            style={{ marginBottom: 10 }}
+                        />
+                        <TextField
+                            label="Password"
+                            size="small"
+                            fullWidth
+                            type="password"
+                            value={password}
+                            onChange={(e) => handlePasswordChange(e.target.value)}
+                            style={{ marginBottom: 10 }}
+                        />
+                        <button type="button" onClick={handleSignIn}>Sign In</button>
                         <span onClick={() => Navigate('/Signup')}>Not Registered?</span>
                         <span>Forgot password?</span>
                     </div>

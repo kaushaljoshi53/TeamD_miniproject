@@ -4,5 +4,4 @@ export interface userdata{
     email:string;
     employeeId:string;
     password:string;
-    rePassword:string;
 }
