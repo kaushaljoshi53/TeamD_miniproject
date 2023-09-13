@@ -3,6 +3,7 @@ import { BiShow, BiHide } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import "../styles/Forget_Password.css";
+import axios from 'axios';
 
 const jinlogo = require("../assets/images/jin-logo.png")
 const mainlogo = require("../assets/images/mainlogo.png")
@@ -32,37 +33,42 @@ export function Forget_Password() {
     });
   };
 
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const { email, password, confirmPassword } = data;
+  
     if (email && password && confirmPassword) {
       if (password === confirmPassword) {
-        const fetchData = await fetch(
-          `${process.env.REACT_APP_SERVER_DOMAIN}/forget_password`,
-          {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(data),
+        try {
+          const response = await axios.post(
+            `${process.env.REACT_APP_SERVER_DOMAIN}/forget_password`,
+            data,
+            {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }
+          );
+  
+          const val = response.data;
+          console.log(val);
+          // alert(val.message);
+          toast(val.message);
+  
+          if (val.alert) {
+            navigate('/login');
           }
-        );
-        const val = await fetchData.json();
-        console.log(val);
-        // alert(val.message);
-        toast(val.message);
-        if (val.alert) {
-          navigate("/login");
+        } catch (error) {
+          console.error('Error:', error);
         }
       } else {
-        alert("Password and confirm password does not matched");
+        alert('Password and confirm password do not match');
       }
-      // }
     } else {
-      alert("Please Enter required fields");
+      alert('Please Enter required fields');
     }
   };
-  return (
+    return (
     <div className="p-0 md:4 bg-white flex holder">
       <div className="img_div flex-none w-1/2 h-screen">
         <img src={mainlogo} className="h-full" />

@@ -6,3 +6,12 @@ export interface userdata{
     password:string;
     repassword:string;
 }
+
+const signup = {
+    Name: String,
+    EmployeeID: String,
+    email: String,
+    password: String,
+    confirmPassword: String,
+    image: String,
+  };

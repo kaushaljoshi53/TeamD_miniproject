@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { BiShow, BiHide } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import '../pages/Dashboard';
 import "../styles/Login.css";
+import axios from 'axios';
 
 const jinlogo = require("../assets/images/jin-logo.png")
 const mainlogo = require("../assets/images/mainlogo.png")
@@ -31,41 +33,48 @@ export const Login = () => {
       };
     });
   };
-  const handleSubmit = async (e:any) => {
-    e.preventDefault();
-    const { email, password } = data;
-    if (email && password) {
-      const fetchData = await fetch(
+
+const handleSubmit = async (e: any) => {
+  e.preventDefault();
+  const { email, password } = data;
+
+  if (email && password) {
+    try {
+      const response = await axios.post(
         `${process.env.REACT_APP_SERVER_DOMAIN}/login`,
+        data,
         {
-          method: "POST",
           headers: {
-            "content-type": "application/json",
+            'Content-Type': 'application/json',
           },
-          body: JSON.stringify(data),
         }
       );
-      const val = await fetchData.json();
+      
+      const val = response.data;
       console.log(val);
       toast(val.message);
+
       if (val.alert) {
-        // dispatch(loginRedux(val));
         setTimeout(() => {
-          navigate("/");
+          navigate('/Dashboard');
         }, 1000);
       } else {
-        alert("Invalid Credentials");
+        alert('Invalid Credentials');
         setData(() => {
           return {
-            email: "",
-            password: "",
+            email: '',
+            password: '',
           };
         });
       }
-    } else {
-      alert("Please Enter required fields");
+    } catch (error) {
+      console.error('Error:', error);
     }
-  };
+  } else {
+    alert('Please Enter required fields');
+  }
+};
+
   return (
     <div className="p-0 md:4 bg-white flex holder">
       <div className="img_div flex-none w-1/2 h-screen">

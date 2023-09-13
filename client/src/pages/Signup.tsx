@@ -4,19 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import "../styles/Signup.css";
 import { ImagetoBase64 } from "../components/ImagetoBase64";
+import axios from 'axios';
+import '../models/Userdata'
 
 const jinlogo = require("../assets/images/jin-logo.png")
 const mainlogo = require("../assets/images/mainlogo.png")
 
-
-const signup = {
-  Name: String,
-  EmployeeID: String,
-  email: String,
-  password: String,
-  confirmPassword: String,
-  image: String,
-};
 
 export function Signup() {
   const navigate = useNavigate();
@@ -57,34 +50,39 @@ export function Signup() {
     });
   };
 
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const { Name, email, password, confirmPassword } = data;
-    if (Name && email && password && confirmPassword) {
+    const { Name, EmployeeID, email, password, confirmPassword } = data;
+  
+    if ((Name || EmployeeID) && email && password && confirmPassword) {
       if (password === confirmPassword) {
-        const fetchData = await fetch(
-          `${process.env.REACT_APP_SERVER_DOMAIN}/signup`,
-          {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(data),
+        try {
+          const response = await axios.post(
+            `${process.env.REACT_APP_SERVER_DOMAIN}/signup`,
+            data,
+            {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }
+          );
+          
+          const val = response.data;
+          console.log(val);
+          // alert(val.message);
+          toast(val.message);
+          
+          if (val.alert) {
+            navigate('/login');
           }
-        );
-        const val = await fetchData.json();
-        console.log(val);
-        // alert(val.message);
-        toast(val.message);
-        if (val.alert) {
-          navigate("/login");
+        } catch (error) {
+          console.error('Error:', error);
         }
       } else {
-        alert("Password and confirm password does not matched");
+        alert('Password and confirm password do not match');
       }
-      // }
     } else {
-      alert("Please Enter required fields");
+      alert('Please enter required fields');
     }
   };
   return (

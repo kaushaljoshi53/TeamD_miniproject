@@ -1,16 +1,31 @@
 import React, { useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
 import { ImagetoBase64 } from "../components/ImagetoBase64";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/MyProfile.css";
 import Sidebar from "../components/Sidebar";
-
+import axios from 'axios';
+import toast, { Toaster } from "react-hot-toast";
+import '../pages/Dashboard';
 const jinlogo = require("../assets/images/jin-logo.png")
 
 export const MyProfile = () => {
-
+  const navigate = useNavigate();
   const [data, setData] = useState({
-    
+    email: "",
+    DOB: "",
+    password: "",
   });
+
+  const handleOnChange = (e:any) => {
+    const { name, value } = e.target;
+    setData((preve) => {
+      return {
+        ...preve,
+        [name]: value,
+      };
+    });
+  };
 
   const handleUploadProfileImage = async (e:any) => {
     const data = await ImagetoBase64(e.target.files[0]);
@@ -27,6 +42,40 @@ export const MyProfile = () => {
   const toggle = () => {
     setisVisible(!isVisible);
   };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const { email, DOB,password } = data;
+  
+    if (email || DOB || password) {
+        try {
+          const response = await axios.post(
+            `${process.env.REACT_APP_SERVER_DOMAIN}/myprofile`,
+            data,
+            {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }
+          );
+  
+          const val = response.data;
+          console.log(val);
+          // alert(val.message);
+          toast(val.message);
+  
+          if (val.alert) {
+            navigate('/Dasboard');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      
+    } else {
+      alert('Please Enter required fields');
+    }
+  };
+  
   return (
  
       <div className="m-0 p-0"> {/*body*/}
