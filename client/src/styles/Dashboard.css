@@ -22,16 +22,18 @@
     font-weight: bold;
     justify-content: space-between;
 }
-
 .main .header span{
     margin-top: 8px;
+}
+.Pholiday
+{
+    max-width:200px;
 }
 
 @media only screen and (max-width:600px){
     .main{
         margin: 0;
     }
-
 
     .main .header{
         background-color: #19105B;

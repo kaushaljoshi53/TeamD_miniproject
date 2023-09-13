@@ -7,20 +7,21 @@ export interface Person {
 }
 interface Props {
   person: Person[];
+
 }
 const BirthdayToday = ({ person }: Props) => { 
   return (
     <div>   
-      <div  >      
+      <div >      
       </div>
-      <div className='profile-card'> 
-        <h2 className="moving-text">Today's Birthday</h2>     
+      <div > 
+        <h2 className="moving-text">today's Birthday</h2>     
         <ul>
           {person.map((s) => (
             <div key={s.name}>
             <div className="flex">
                 <div className="profileImage">
-                    <img src="assets/images/profile.png" alt="profile" style={{maxWidth:50}}/>
+                    
                     <div className='names'>
                         <span className='username'>{s.name}</span>
                         <div className='designation'><h6>{s.designation}</h6></div>

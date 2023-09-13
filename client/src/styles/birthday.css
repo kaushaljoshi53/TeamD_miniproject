@@ -1,58 +1,25 @@
-
-  .list-items
-  {
-    list-style-type: none;
-  }
- 
-.birthday-icon {
-    cursor: pointer;
-    transition: color 0.3s;
-    padding-right:50px;/* Add padding to the right */
-    padding-top:30px; /* Add padding to the top */
+.profile-container {
+    display: flex;
+    align-items: center;
+    max-width:400px;
 }
-
-.profile-card {
-    position: absolute;
-    top: 50px; /* Adjust the positioning as needed */
-    right:60px;
-    background-color: white;
-    border: 1px solid #ccc;
-    padding-right: 50px;
-    width:200px;/* You need to specify the unit, e.g., 'px' or 'rem' */
-    height: max-content;
+.profile-container img {
+    margin-right: 10px; /* Adjust margin as needed */
 }
-
-.birthday-container:hover .profile-card {
-    display: block; /* Display the profile card on hover */
-}
-.username
-{
-    color:blue;
-    size: 100px;
-    font-weight: bold;
-    padding-left:10px;
-}
-.names{
+.details {
     display: flex;
     flex-direction: column;
 }
-.designation
-{
-    margin-left: 10px;
-    color:black;
-    padding: 0 0 0 0;
-    height: 30px;
-    transform: translateY(0px);/* This transformation doesn't affect the element */
+
+.name {
+    font-weight: bold;
+}
+.designation {
+    color: #888;
 }
 
-.profileImage
-{
-    display:flex;
-    justify-content: flex-start;
+@media screen and (min-width: 768px) {
+    .profile-container img {
+        margin-right: 20px; /* Adjust margin as needed for larger screens */
+    }
 }
-
-.profiletitle
-{
-    color:deeppink;
-}
-
