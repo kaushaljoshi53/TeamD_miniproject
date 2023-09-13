@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { BiShow, BiHide } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../pages/Dashboard';
 import "../styles/Login.css";
 import axios from 'axios';
@@ -52,14 +53,18 @@ const handleSubmit = async (e: any) => {
       
       const val = response.data;
       console.log(val);
-      toast(val.message);
+      toast.success(val.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      })
 
       if (val.alert) {
         setTimeout(() => {
           navigate('/Dashboard');
         }, 1000);
       } else {
-        alert('Invalid Credentials');
+        toast.error('Invalid Crendentials!', {
+          position: toast.POSITION.TOP_RIGHT,
+        })
         setData(() => {
           return {
             email: '',
@@ -71,7 +76,9 @@ const handleSubmit = async (e: any) => {
       console.error('Error:', error);
     }
   } else {
-    alert('Please Enter required fields');
+    toast.warning('Please Enter required fields!', {
+      position: toast.POSITION.TOP_RIGHT,
+    })
   }
 };
 

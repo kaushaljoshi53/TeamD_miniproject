@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { BiShow, BiHide, BiLock } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
 import "../styles/Signup.css";
 import { ImagetoBase64 } from "../components/ImagetoBase64";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import '../models/Userdata'
 
@@ -70,7 +71,9 @@ export function Signup() {
           const val = response.data;
           console.log(val);
           // alert(val.message);
-          toast(val.message);
+          toast.success(val.message, {
+            position: toast.POSITION.TOP_RIGHT,
+          })
           
           if (val.alert) {
             navigate('/login');
@@ -79,15 +82,19 @@ export function Signup() {
           console.error('Error:', error);
         }
       } else {
-        alert('Password and confirm password do not match');
+        toast.error('Password and confirm password do not match!', {
+          position: toast.POSITION.TOP_RIGHT,
+        })
       }
     } else {
-      alert('Please enter required fields');
+      toast.warning('Please enter required fields!', {
+        position: toast.POSITION.TOP_RIGHT,
+      })
     }
   };
   return (
     <div className="p-0 md:4 bg-white flex holder">
-      <div className="img_div flex-none w-1/2 h-screen">
+      <div className="img_div flex-none md:w-1/2 md:h-screen w-full h-1/4">
         <img src={mainlogo} className="h-full" />
       </div>
 
@@ -140,7 +147,7 @@ export function Signup() {
             id="email"
             name="email"
             required
-            pattern="[.]+@jmangroup\.com"
+            pattern="^[A-Za-z0-9._-]+@jmangroup\.com$"
             className="insens bg-slate-200 focus-within:outline-blue-300"
             value={data.email}
             onChange={handleOnChange}

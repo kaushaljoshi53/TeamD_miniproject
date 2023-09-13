@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { BiShow, BiHide } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "../styles/Forget_Password.css";
 import axios from 'axios';
 
@@ -53,7 +54,9 @@ export function Forget_Password() {
           const val = response.data;
           console.log(val);
           // alert(val.message);
-          toast(val.message);
+          toast.success(val.message, {
+            position: toast.POSITION.TOP_RIGHT,
+          })
   
           if (val.alert) {
             navigate('/login');
@@ -62,10 +65,14 @@ export function Forget_Password() {
           console.error('Error:', error);
         }
       } else {
-        alert('Password and confirm password do not match');
+        toast.error('Password and confirm password do not match', {
+          position: toast.POSITION.TOP_RIGHT,
+        })
       }
     } else {
-      alert('Please Enter required fields');
+      toast.warning('Please Enter required fields', {
+        position: toast.POSITION.TOP_RIGHT,
+      })
     }
   };
     return (

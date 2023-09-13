@@ -5,7 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/MyProfile.css";
 import Sidebar from "../components/Sidebar";
 import axios from 'axios';
-import toast, { Toaster } from "react-hot-toast";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../pages/Dashboard';
 const jinlogo = require("../assets/images/jin-logo.png")
 
@@ -62,7 +63,9 @@ export const MyProfile = () => {
           const val = response.data;
           console.log(val);
           // alert(val.message);
-          toast(val.message);
+          toast.success(val.message, {
+            position: toast.POSITION.TOP_RIGHT,
+          })
   
           if (val.alert) {
             navigate('/Dasboard');
@@ -72,7 +75,9 @@ export const MyProfile = () => {
         }
       
     } else {
-      alert('Please Enter required fields');
+      toast.warning('Please Enter required fields',{
+        position:toast.POSITION.TOP_RIGHT
+      });
     }
   };
   
