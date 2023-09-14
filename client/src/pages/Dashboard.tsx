@@ -7,7 +7,6 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Hidden,
   IconButton,
   Typography,
 } from '@mui/material';
@@ -16,7 +15,6 @@ import ProjectAllocation from '../components/ProjectAllocation';
 import EventCard from '../components/EventsCard';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BirthdayCard from '../components/Birthdays';
-import axios from 'axios'; // Import Axios for making HTTP requests
 import { BirthdayPerson } from '../components/Birthdays';
 import { api } from '../services/Apis';
 
