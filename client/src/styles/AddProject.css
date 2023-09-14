@@ -351,7 +351,7 @@ Navbar.css
   }
 
  
-
+/* 
   .close-button {
 
     position: absolute;
@@ -364,7 +364,7 @@ Navbar.css
 
   }
 
- 
+  */
 
   .close-mark {
 
@@ -514,4 +514,72 @@ Navbar.css
   margin-top: -2px;
 
 }
-  
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styling for the pop-up form */
+.popup-form {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  max-width: 600px; /* Adjust as needed */
+  width: 100%;
+}
+
+/* Close button for the pop-up form */
+.popup-form .close-buttons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #777;
+}
+
+/* Form styling - use .popup-form to target elements within the form */
+.popup-form .form-groups {
+  margin-bottom: 10px;
+}
+
+/* Additional styles for the form elements within the pop-up form */
+.popup-form input[type="text"],
+.popup-form input[type="date"],
+.popup-form select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+/* Styling for the add button within the pop-up form */
+.popup-form .butonclr {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.popup-form .butonclr:hover {
+  background-color: #218838;
+}
+.close-buttons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #777;
+  z-index: 2; /* Ensure the button is above other elements */
+}

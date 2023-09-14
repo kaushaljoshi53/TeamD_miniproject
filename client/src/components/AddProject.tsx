@@ -93,6 +93,9 @@ export default function BasicAccordion() {
         );
         setFilteredProjects(filtered);
     }, [searchQuery, projectData]);
+
+
+    
     return (
         <div className="accordion-container">
             <Accordion className="Project">
@@ -129,15 +132,17 @@ export default function BasicAccordion() {
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             />
                             <button className="projectadd" onClick={toggleProjectVisibility}>ADD</button>
-                            <div className={`form-container ${isProjectVisible ? 'active' : ''}`}>
+                            <div className={`form-containers ${isProjectVisible ? 'active' : ''}`}>
 
                                 {isProjectVisible && (
-                                    <div className="form-container">
-                                        <div className="close-button" onClick={handleCloseForms}>
-                                            <span className="close-mark">&times;</span>
+                                     <div className="popup-overlay">
+                                     <div className="popup-form">
+                                    <div className="form-containers">
+                                        <div className="close-buttons" onClick={handleCloseForms}>
+                                            <span className="close-marks">&times;</span>
                                         </div>
-                                        <form className='formdetails'>
-                                            <div className="form-group">
+                                        <form className='formdetailss'>
+                                            <div className="form-groups">
                                                 <label htmlFor="projectName">Project Name:</label>
                                                 <input
                                                     type="text"
@@ -294,6 +299,8 @@ export default function BasicAccordion() {
 
                                         </form>
 
+                                    </div>
+                                    </div>
                                     </div>
 
                                 )}
