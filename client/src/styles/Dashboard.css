@@ -9,11 +9,16 @@
     padding: 0;
     margin: 0;
     display: flex;
+    /* background-color: red; */
+    width:10%;
 }
+
 .main{
     margin-left: 240px;
     height: 100%;
-    width: 100%;
+    width: 100%-240px;
+    /* background-color: blue; */
+
 }
 .main .header{
     color: #19105B;
@@ -27,9 +32,26 @@
     margin-top: 8px;
 }
 
+.main .body .projectAllocation{
+    /* background-color: red; */
+    margin-left: 12px;
+    width: 97%;
+    padding: 0;
+}
+
+.main .body .events{
+    /* background-color: red; */
+    margin-top: 2%;
+    margin-left: 12px;
+    width: 65%;
+    padding: 0;
+}
+
+
 @media only screen and (max-width:600px){
     .main{
         margin: 0;
+        /* background-color: red; */
     }
 
 
@@ -45,7 +67,23 @@
 
     .main .header p{
         display: none;
+        position: fixed;
+        left: 5px;
+        font-size: xx-small;
+    }
+
+    .main .body .projectAllocation{
+        background-color: red;
+        margin: 2%;
+        width: 95%;
+        padding: 0;
     }
     
+    .main .body .events{
+        background-color: red;
+        margin: 2%;
+        width: 95%;
+        padding: 0;
+    }
     
 }
