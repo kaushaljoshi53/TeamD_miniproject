@@ -113,13 +113,14 @@ export default function Sidebar() {
             <MenuIcon
                 onClick={handleDrawerToggle}
                 sx={{
-                    position:'absolute',
+                    position:'fixed',
                     top:15,
                     left:5,
                     fontSize: 35,
                     fontWeight: "bold",
                     color: "whitesmoke",
-                    display: { xs: 'block', sm: 'none' }
+                    display: { xs: 'block', sm: 'none' },
+                    zIndex:5
                 }} />
         </Box>
     );

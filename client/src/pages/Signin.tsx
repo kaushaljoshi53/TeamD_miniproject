@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import '../styles/Signin.css'
 import { TextField } from "@mui/material";
+import { userDataValidations } from "../utils/userDataValidation";
 
 const jin = require("../assets/images/jin_login.png")
 
@@ -18,8 +19,9 @@ export const Signin = () => {
         setPassword(value);
     };
 
-    const handleSignIn = () => {
+    const handleSignIn = async () => {
 
+        const response = await userDataValidations.signin(email,password) || '';
         Navigate('/dashboard');
     };
 
@@ -33,7 +35,7 @@ export const Signin = () => {
                     <h2>Sign In</h2>
                     <div className="inputs">
                         <TextField
-                            label="Email*"
+                            label="Email"
                             size="small"
                             fullWidth
                             value={email}

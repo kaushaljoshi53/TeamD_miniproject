@@ -47,4 +47,14 @@ export class userDataValidations {
     }
   }
 
+
+  static async signin(email:string, passowrd:string): Promise<any>{
+
+    if (email === '' || passowrd === ''){
+      return "Fill the credentials"
+    }
+    const response = await api.signin(email,passowrd)
+    
+
+  }
 }

@@ -1,26 +1,27 @@
-*{
+* {
     padding: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.Dashboard{
+.Dashboard {
     height: 100vh;
     padding: 0;
     margin: 0;
     display: flex;
     /* background-color: red; */
-    width:10%;
+    width: 10%;
 }
 
-.main{
+.main {
     margin-left: 240px;
     height: 100%;
     width: 100%-240px;
     /* background-color: blue; */
 
 }
-.main .header{
+
+.main .header {
     color: #19105B;
     display: flex;
     padding: 1rem;
@@ -28,18 +29,19 @@
     justify-content: space-between;
 }
 
-.main .header span{
+
+.main .header span {
     margin-top: 8px;
 }
 
-.main .body .projectAllocation{
+.main .body .projectAllocation {
     /* background-color: red; */
     margin-left: 12px;
     width: 97%;
     padding: 0;
 }
 
-.main .body .events{
+.main .body .events {
     /* background-color: red; */
     margin-top: 2%;
     margin-left: 12px;
@@ -47,43 +49,86 @@
     padding: 0;
 }
 
+.main .body .holidays {
+    margin-top: 2%;
+    margin-left: 12px;
+    width: 31%;
+    padding: 0;
+}
 
-@media only screen and (max-width:600px){
-    .main{
+.main .body .lower {
+    display: flex;
+}
+
+@media only screen and (max-width:600px) {
+    .main {
         margin: 0;
         /* background-color: red; */
     }
 
 
-    .main .header{
+    .main .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        /* Adjust the z-index as needed */
         background-color: #19105B;
         color: whitesmoke;
         height: 35px;
         display: flex;
-        justify-content: center;
         align-items: center;
-
+        justify-content: space-between;
     }
 
-    .main .header p{
-        display: none;
-        position: fixed;
-        left: 5px;
-        font-size: xx-small;
+    .main .header .cakeIcon {
+        color: whitesmoke
     }
 
-    .main .body .projectAllocation{
-        background-color: red;
+    .main .header h2 {
+        margin-left: 12%;
+    }
+
+    .main .header p {
+        font-size: small;
+        margin-top: 1%;
+        margin-left: 5%;
+    }
+
+    .main .header-info span {
+        margin-right: 5px;
+    }
+
+    .main .header-info button {
+        display: inline-block;
+    }
+
+    .main .body {
+        margin-top: 20%;
+    }
+
+    .main .body .projectAllocation {
         margin: 2%;
         width: 95%;
         padding: 0;
     }
-    
-    .main .body .events{
-        background-color: red;
+
+    .main .body .events {
         margin: 2%;
         width: 95%;
         padding: 0;
     }
-    
+
+    .main .body .holidays {
+        margin: 2%;
+        width: 95%;
+        padding: 0;
+    }
+
+    .main .body .lower {
+        display: flex;
+        flex-direction: column;
+    }
+
 }

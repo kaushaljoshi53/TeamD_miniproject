@@ -1,22 +1,22 @@
 import { userdata } from "../models/Userdata";
 import axios from "axios";
+import { BirthdayPerson } from "../components/Birthdays";
+class Apis {
 
-class Apis{
+    async signup(data: userdata): Promise<string> {
 
-    async signup(data:userdata):Promise<string>{
- 
         console.log(data);
-        
+
 
         try {
-            const response = await axios.post("http://localhost:8080/signup",data);
+            const response = await axios.post("http://localhost:8080/signup", data);
             if (response.status === 400) {
                 return "Null values not accepted";
             }
-            if (response.status === 200){
+            if (response.status === 200) {
                 return response.data.message;
             }
-            if (response.status === 201){
+            if (response.status === 201) {
                 return "User registered successfully";
             }
             if (response.status === 500) {
@@ -25,13 +25,60 @@ class Apis{
             return "Something went wrong."
 
         } catch (error) {
-            console.error("Error in signup: ",error);
+            console.error("Error in signup: ", error);
             return "Server error"
         }
-        
-        
-        
 
+    }
+
+
+    async signin(email:string,password:string): Promise<any> {
+        const response = await axios.post("http://localhost:8080/signin", {email:email, passowrd:password});
+        try {
+            if (response.status === 201){
+                return "Logged In Successfully";
+            }
+            else{
+                return "Invalid Credentials";
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+
+
+
+    async getBirthdayPerson(): Promise<BirthdayPerson[]> {
+        const person: BirthdayPerson[] = [{
+            name: "Kaushal Joshi",
+            designation: "Software Engineer",
+            imageUrl: "aa"
+        }, {
+            name: "Ankit Kumar Mishra",
+            designation: "Software Engineer",
+            imageUrl: "aa"
+        },{
+            name: "Narendra Godara",
+            designation: "Software Engineer",
+            imageUrl: "aa"
+        },{
+            name: "Purvaja Vasistha",
+            designation: "Software Engineer",
+            imageUrl: "aa"
+        },{
+            name: "Himanshu Soni",
+            designation: "Software Engineer",
+            imageUrl: "aa"
+        }]
+        try {
+            // const response = await axios.get("http://localhost:8080/getbirthdaydata");
+            // if (response.status === 200) {
+            //     return response.data.birthdayData;
+            // }
+            return person
+        } catch (error) {
+            throw error;
+        }
     }
 }
 

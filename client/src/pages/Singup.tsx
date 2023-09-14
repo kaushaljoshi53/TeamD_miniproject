@@ -79,8 +79,10 @@ export const Signup: React.FC = () => {
     if (message !== 'User registered successfully') {
       toast.error(message);
     } else {
-      toast.success("Sign up successful!"); // You can customize this message
-      navigate('/')
+      toast.success("Sign up successful!"); 
+      setTimeout(()=>{
+        navigate('/')
+      },2000)
     }
 
   };
