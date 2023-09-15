@@ -10,27 +10,16 @@ class Apis {
 
         try {
             const response = await axios.post("http://localhost:8080/signup", data);
-            if (response.status === 400) {
-                return "Null values not accepted";
-            }
-            if (response.status === 200) {
-                return response.data.message;
-            }
             if (response.status === 201) {
                 return "User registered successfully";
             }
-            if (response.status === 500) {
-                return "Internal server error"
-            }
             return "Something went wrong."
-
-        } catch (error) {
-            console.error("Error in signup: ", error);
-            return "Server error"
+        } catch (error:any) {
+            console.error("Error in signup: ", error.response.data.message);
+            return error.response.data.message
         }
 
     }
-
 
     async signin(email:string,password:string): Promise<any> {
         const response = await axios.post("http://localhost:8080/signin", {email:email, passowrd:password});
