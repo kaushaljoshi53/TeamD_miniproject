@@ -9,31 +9,38 @@ class Apis {
 
 
         try {
-            const response = await axios.post("http://localhost:8080/signup", data);
+            const response = await axios.post("http://localhost:8080/api/signup", data);
             if (response.status === 201) {
                 return "User registered successfully";
             }
             return "Something went wrong."
-        } catch (error:any) {
+        } catch (error: any) {
             console.error("Error in signup: ", error.response.data.message);
-            return error.response.data.message
+            return error.response.data.message;
         }
 
     }
 
-    async signin(email:string,password:string): Promise<any> {
-        const response = await axios.post("http://localhost:8080/signin", {email:email, passowrd:password});
+    async signin(email: string, password: string): Promise<any> {
+
+        const response: any = await axios.post("http://localhost:8080/api/signin", { email: email, password: password });
+
         try {
-            if (response.status === 201){
-                return "Logged In Successfully";
+            if (response.status === 201) {
+
+                localStorage.setItem('token', response.data.token);
+
+                return response.data.message;
             }
-            else{
-                return "Invalid Credentials";
+            else {
+                return response.data.message;
             }
-        } catch (error) {
-            throw error;
+        } catch (error: any) {
+            console.error(error);
         }
     }
+
+
 
 
 
@@ -46,15 +53,15 @@ class Apis {
             name: "Ankit Kumar Mishra",
             designation: "Software Engineer",
             imageUrl: "aa"
-        },{
+        }, {
             name: "Narendra Godara",
             designation: "Software Engineer",
             imageUrl: "aa"
-        },{
+        }, {
             name: "Purvaja Vasistha",
             designation: "Software Engineer",
             imageUrl: "aa"
-        },{
+        }, {
             name: "Himanshu Soni",
             designation: "Software Engineer",
             imageUrl: "aa"

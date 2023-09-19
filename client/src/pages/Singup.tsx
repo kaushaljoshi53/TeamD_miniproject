@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const jin = require("../assets/images/jin_login.png");
 
-export const Signup: React.FC = () => {
+const Signup: React.FC = () => {
   const navigate = useNavigate();
 
   // Define state variables for form fields and errors
@@ -186,3 +186,6 @@ export const Signup: React.FC = () => {
     </div>
   );
 };
+
+
+export default Signup;

@@ -20,9 +20,11 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import MenuIcon from '@mui/icons-material/Menu';
+import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 
 
-import '../styles/Sidebar.css'
+import '../styles/Sidebar.css';
 
 const jinlogo = require('../assets/images/jin-logo.png')
 
@@ -33,7 +35,7 @@ const drawerWidth = 240;
 
 export default function Sidebar() {
 
-
+    const Navigate = useNavigate();
 
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -55,73 +57,81 @@ export default function Sidebar() {
         { text: "Resourcing", icon: <PeopleIcon /> },
     ];
 
-    const drawer = (
-        <div className="Sidebar" style={{ background: "linear-gradient(#19105b, #472067, #7c3375, #FF6196)", height: "100%" }}>
-            <div className="header">
-                <img src={jinlogo} alt="" style={{ marginTop: 15, marginLeft: 15 }} />
+    const handleLogout = async () => {
+        localStorage.removeItem('token');
+        toast.success("Logged Out Successfully");
+        setTimeout(() => {
+            Navigate('/');
+        }, 2000);
+    }
 
-            </div>
-            <List style={{ color: "whitesmoke", fontSize: 100, height:"83%" }}>
-                {menuItems.map((item, index) => (
-                    <ListItem key={item.text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon style={{ color: "whitesmoke", padding: 0, margin: 0 }}>{item.icon}</ListItemIcon>
-                            <ListItemText style={{ padding: 0, margin: 0 }} primary={item.text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
-            <div className="footer" >
-                <div className="profile">
-                    <Avatar alt='abc' src='' sx={{cursor:"pointer"}} />
-                    <span>Kaushal</span>
-                </div>
-                <IconButton aria-label='Logout'>
-                    <LogoutIcon sx={{ color: "whitesmoke" }} />
-                </IconButton>
-            </div>
+const drawer = (
+    <div className="Sidebar" style={{ background: "linear-gradient(#19105b, #472067, #7c3375, #FF6196)", height: "100%" }}>
+        <div className="header">
+            <img src={jinlogo} alt="" style={{ marginTop: 15, marginLeft: 15 }} />
+
         </div>
-    );
+        <List style={{ color: "whitesmoke", fontSize: 100, height: "83%" }}>
+            {menuItems.map((item, index) => (
+                <ListItem key={item.text} disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon style={{ color: "whitesmoke", padding: 0, margin: 0 }}>{item.icon}</ListItemIcon>
+                        <ListItemText style={{ padding: 0, margin: 0 }} primary={item.text} />
+                    </ListItemButton>
+                </ListItem>
+            ))}
+        </List>
+        <div className="footer" >
+            <div className="profile">
+                <Avatar alt='abc' src='' sx={{ cursor: "pointer" }} />
+                <span>Kaushal</span>
+            </div>
+            <IconButton aria-label='Logout' onClick={handleLogout}>
+                <LogoutIcon sx={{ color: "whitesmoke" }} />
+            </IconButton>
+        </div>
+    </div>
+);
 
 
-    return (
-        <Box>
-            <Drawer
-                variant="temporary"
-                open={mobileOpen}
-                onClose={handleDrawerToggle}
-                ModalProps={{
-                    keepMounted: true, // Better open performance on mobile.
-                }}
-                sx={{
-                    display: { xs: 'block', sm: 'none' },
-                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-                }}
-            >
-                {drawer}
-            </Drawer>
-            <Drawer
-                variant="permanent"
-                sx={{
-                    display: { xs: 'none', sm: 'block' },
-                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-                }}
-                open
-            >
-                {drawer}
-            </Drawer>
-            <MenuIcon
-                onClick={handleDrawerToggle}
-                sx={{
-                    position:'fixed',
-                    top:15,
-                    left:5,
-                    fontSize: 35,
-                    fontWeight: "bold",
-                    color: "whitesmoke",
-                    display: { xs: 'block', sm: 'none' },
-                    zIndex:5
-                }} />
-        </Box>
-    );
+return (
+    <Box>
+        <Drawer
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+                display: { xs: 'block', sm: 'none' },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            }}
+        >
+            {drawer}
+        </Drawer>
+        <Drawer
+            variant="permanent"
+            sx={{
+                display: { xs: 'none', sm: 'block' },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            }}
+            open
+        >
+            {drawer}
+        </Drawer>
+        <MenuIcon
+            onClick={handleDrawerToggle}
+            sx={{
+                position: 'fixed',
+                top: 15,
+                left: 5,
+                fontSize: 35,
+                fontWeight: "bold",
+                color: "whitesmoke",
+                display: { xs: 'block', sm: 'none' },
+                zIndex: 5
+            }} />
+    </Box>
+);
 }

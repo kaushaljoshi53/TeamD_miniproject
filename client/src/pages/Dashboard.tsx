@@ -15,10 +15,17 @@ import ProjectAllocation from '../components/ProjectAllocation';
 import EventCard from '../components/EventsCard';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BirthdayCard from '../components/Birthdays';
+import HolidayCard from '../components/HolidayCard';
 import { BirthdayPerson } from '../components/Birthdays';
 import { api } from '../services/Apis';
+import { ToastContainer } from "react-toastify";
+import { useAuthCheck } from '../utils/useAuthCheck';
 
-export const Dashboard: React.FC = () => {
+const Dashboard: React.FC = () => {
+
+  useAuthCheck();
+
+
   const today: string = new Date().toDateString();
 
   const [isFormVisible, setFormVisible] = useState(false);
@@ -43,6 +50,7 @@ export const Dashboard: React.FC = () => {
         <Sidebar />
       </div>
       <div className="main">
+        <ToastContainer/>
         <div className="header">
           <h2>Dashboard</h2>
           <p>
@@ -72,7 +80,7 @@ export const Dashboard: React.FC = () => {
               >
                 <Typography >Projects Allocated</Typography>
               </AccordionSummary>
-              <AccordionDetails sx={{ padding: 0, maxHeight: 650, overflow: 'hidden', overflowY: 'scroll' }}>
+              <AccordionDetails sx={{ padding: 0, maxHeight: 250, overflow: 'hidden', overflowY: 'scroll' }}>
                 <Typography>
                   <ProjectAllocation />
                 </Typography>
@@ -107,7 +115,7 @@ export const Dashboard: React.FC = () => {
                 </AccordionSummary>
                 <AccordionDetails sx={{ padding: 0, maxHeight: 200, overflow: 'hidden', overflowY: 'scroll' }}>
                   <Typography>
-                    <EventCard />
+                    <HolidayCard/>
                   </Typography>
                 </AccordionDetails>
               </Accordion>
@@ -118,3 +126,6 @@ export const Dashboard: React.FC = () => {
     </div>
   );
 };
+
+
+export default Dashboard;

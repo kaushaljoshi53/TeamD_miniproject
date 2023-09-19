@@ -2,7 +2,6 @@ import { api } from "../services/Apis";
 import { userdata } from "../models/Userdata";
 import { signUpRealTime } from "./realTimeValidation";
 
-
 export class userDataValidations {
 
   static async signup(data: userdata, rePassword: string): Promise<string> {
@@ -39,7 +38,6 @@ export class userDataValidations {
               }
             }
           }
-
         }
       }
       const message = await api.signup(data);
@@ -48,12 +46,15 @@ export class userDataValidations {
   }
 
 
-  static async signin(email:string, passowrd:string): Promise<any>{
-
-    if (email === '' || passowrd === ''){
-      return "Fill the credentials"
+  static async signin(email:string, password:string): Promise<any>{
+    
+    if (email === '' || password === ''){
+      return "Fill The Credentials"
     }
-    const response = await api.signin(email,passowrd)
+    const message = await api.signin(email,password);
+    
+    return message;
+
     
 
   }

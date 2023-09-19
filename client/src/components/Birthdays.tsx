@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Avatar, Typography, Card, CardContent, IconButton } from '@mui/material';
+import { Avatar, Typography, Card, CardContent, IconButton, Paper } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
@@ -27,7 +27,7 @@ const BirthdayCard: React.FC<Props> = ({ birthdays }) => {
   };
 
   useEffect(() => {
-    const interval = setInterval(nextBirthday, 5000); // Change slide every 5 seconds (5000 milliseconds)
+    const interval = setInterval(nextBirthday, 2000); // Change slide every 5 seconds (5000 milliseconds)
 
     return () => {
       clearInterval(interval); // Cleanup the interval when the component unmounts
@@ -38,7 +38,7 @@ const BirthdayCard: React.FC<Props> = ({ birthdays }) => {
 
   return (
     <div className="birthdayCard">
-      <Card style={{ width: 300, textAlign: 'center', backgroundColor: 'pink', margin: '0 auto', position: 'fixed', right:"1%",top:"10%", zIndex:5 }}>
+      <Paper elevation={14} style={{ width: 300, textAlign: 'center', backgroundColor: '#FFE5EE',color:'#19015B', margin: '0 auto', position: 'fixed', right:"1%",top:"7%", zIndex:7}}>
         <CardContent>
           <Avatar
             style={{ width: 75, height: 75, margin: '0 auto' }}
@@ -56,7 +56,7 @@ const BirthdayCard: React.FC<Props> = ({ birthdays }) => {
             <ArrowForwardIcon />
           </IconButton>
         </div>
-      </Card>
+      </Paper>
     </div>
   );
 };

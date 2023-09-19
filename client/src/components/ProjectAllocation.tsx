@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { Autocomplete, AutocompleteInputChangeReason, TextField } from '@mui/material';
 
 function createData(
   name: string,
@@ -50,7 +51,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-        <TableCell sx={{width:10}}>
+        <TableCell sx={{ width: 10 }}>
           <IconButton
             aria-label="expand row"
             size="small"
@@ -62,25 +63,42 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell component="th" scope="row">
           {row.name}
         </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
+        <TableCell >{row.calories}</TableCell>
+        <TableCell >{row.fat}</TableCell>
+        <TableCell >{row.carbs}</TableCell>
+        <TableCell >{row.protein}</TableCell>
+        <TableCell >{row.protein}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
-                History
+              <Typography variant='h6'>
+                Details
               </Typography>
-              <Table size="small" aria-label="purchases">
+              <Table size='small' aria-label="projectDetails">
+                <TableRow>
+                  <TableCell>Start Date</TableCell>
+                  <TableCell>End Date</TableCell>
+                  <TableCell>Project Status</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>2023/04/01</TableCell>
+                  <TableCell>2023/09/05</TableCell>
+                  <TableCell>Amber</TableCell>
+                </TableRow>
+              </Table>
+              <Typography variant='h6'>
+                Resources
+              </Typography>
+              <Table size="small" aria-label="projectTeam">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Total price ($)</TableCell>
+                    <TableCell>Name</TableCell>
+                    <TableCell >Approver</TableCell>
+                    <TableCell>Allocation Start Date</TableCell>
+                    <TableCell >Allocation End Date</TableCell>
+                    <TableCell >Status</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -90,8 +108,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                         {historyRow.date}
                       </TableCell>
                       <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      <TableCell align="right">
+                      <TableCell >{historyRow.amount}</TableCell>
+                      <TableCell >{historyRow.amount}</TableCell>
+                      <TableCell >
                         {Math.round(historyRow.amount * row.price * 100) / 100}
                       </TableCell>
                     </TableRow>
@@ -106,7 +125,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   );
 }
 
-const rows = [
+const initialRows = [
   createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
   createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
   createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
@@ -115,17 +134,77 @@ const rows = [
 ];
 
 export default function ProjectAllocation() {
+  const [searchText, setSearchText] = React.useState('');
+  const [selectedOption, setSelectedOption] = React.useState<string>('');
+  const [rows, setRows] = React.useState(initialRows);
+
+  // Handle input change for search
+  // Modify the event types to accept the correct parameters
+  const handleSearchInputChange = (
+    event: React.ChangeEvent<{}>, // Change the event type
+    value: string,
+    reason: AutocompleteInputChangeReason
+  ) => {
+    const text = value.toLowerCase();
+    setSearchText(text);
+    const filteredRows = initialRows.filter((row) =>
+      row.name.toLowerCase().includes(text)
+    );
+    setRows(filteredRows);
+  };
+
+  const handleOptionSelect = (
+    event: React.ChangeEvent<{}>, // Change the event type
+    value: string | null
+  ) => {
+    if (value) {
+      setSelectedOption(value);
+      setSearchText(value.toLowerCase());
+    } else {
+      setSelectedOption('');
+    }
+  };
+
+
   return (
-    <TableContainer component={Paper} sx={{width:"100%",margin:0}}>
+    <TableContainer component={Paper} sx={{ width: "100%", margin: 0 }}>
       <Table aria-label="collapsible table" size='small'>
-        <TableHead sx={{backgroundColor:"#FFE5EE"}}>
-          <TableRow sx={{height:2}} >
+        <TableHead>
+          <TableRow>
+            <TableCell colSpan={7}>
+              <Autocomplete
+                freeSolo
+                id="free-solo-2-demo"
+                disableClearable
+                options={initialRows.map((option) => option.name)}
+                value={selectedOption}
+                onInputChange={handleSearchInputChange} // Handle input change
+                onChange={handleOptionSelect} // Handle option select
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Search input"
+                    InputProps={{
+                      ...params.InputProps,
+                      type: 'search',
+                    }}
+                    sx={{ padding: 0 }}
+                    value={searchText} // Set the input value
+                  />
+                )}
+              />
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableHead sx={{ backgroundColor: "#FFE5EE" }}>
+          <TableRow sx={{ height: 2 }} >
             <TableCell />
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell>Project Name</TableCell>
+            <TableCell >Project Manager</TableCell>
+            <TableCell >Approver</TableCell>
+            <TableCell >Allocation Start Date</TableCell>
+            <TableCell >Allocation End Date</TableCell>
+            <TableCell >Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

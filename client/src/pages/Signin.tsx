@@ -3,30 +3,45 @@ import { useNavigate } from 'react-router-dom'
 import '../styles/Signin.css'
 import { TextField } from "@mui/material";
 import { userDataValidations } from "../utils/userDataValidation";
+import { ToastContainer, toast } from "react-toastify";
 
 const jin = require("../assets/images/jin_login.png")
 
-export const Signin = () => {
+const Signin = () => {
     const Navigate = useNavigate();
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
-    const handleEmailChange = (value:string) => {
+    const handleEmailChange = (value: string) => {
         setEmail(value);
     };
 
-    const handlePasswordChange = (value:string) => {
+    const handlePasswordChange = (value: string) => {
         setPassword(value);
     };
 
     const handleSignIn = async () => {
+        
+        const response = await userDataValidations.signin(email, password) || '';
 
-        const response = await userDataValidations.signin(email,password) || '';
-        Navigate('/dashboard');
+        if (response === "Logged In Successfully") {
+            toast.success(response);
+            setTimeout(() => {
+                Navigate('/dashboard')
+            },
+                2000)
+        }
+        else if (response === "Invalid Credentials") {
+            toast.error("Invalid Credentials");
+        }
+        else {
+            toast.warning(response);
+        }
     };
 
     return (
         <div className="Signin">
+            <ToastContainer />
             <div className="bg">
                 <img src={jin} alt="" />
             </div>
@@ -62,3 +77,5 @@ export const Signin = () => {
         </div>
     );
 }
+
+export default Signin;
