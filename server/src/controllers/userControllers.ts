@@ -119,12 +119,24 @@ class UserController {
 
       const securityKey = process.env.JWT_KEY || 'abcd';
 
-      const token = jwt.sign({ employeeId: user.employeeId, email: user.email }, securityKey, { expiresIn: '1h' });
+      const token = jwt.sign({ employeeId: user.employeeId, email: user.email, firstName: user.firstName }, securityKey, { expiresIn: '1h' });
 
-      console.log(token);
+      const cookieOptions = {
+
+        expires:
+
+          new Date(
+
+            Date.now() + (parseInt(process.env.JWT_COOKIE_EXPIRES as string) || 1) * 24 * 60 * 60 * 1000
+
+          ),
+
+        httpOnly: true,
+
+      };
 
 
-      return res.status(201).json({ message: "Logged In Successfully", token: token });
+      return res.cookie('token',token,cookieOptions).status(201).json({ message: "Logged In Successfully", token: token, isAdmin: user.isAdmin });
 
 
     } catch (error) {
