@@ -13,38 +13,10 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Autocomplete, AutocompleteInputChangeReason, TextField } from '@mui/material';
+import projectsData from '../models/ProjectsData';
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-  price: number,
-) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      {
-        date: '2020-01-05',
-        customerId: '11091700',
-        amount: 3,
-      },
-      {
-        date: '2020-01-02',
-        customerId: 'Anonymous',
-        amount: 1,
-      },
-    ],
-  };
-}
 
-function Row(props: { row: ReturnType<typeof createData> }) {
+function Row(props: { row: projectsData}) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
@@ -61,13 +33,13 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.name}
+          {row.projectName}
         </TableCell>
-        <TableCell >{row.calories}</TableCell>
-        <TableCell >{row.fat}</TableCell>
-        <TableCell >{row.carbs}</TableCell>
-        <TableCell >{row.protein}</TableCell>
-        <TableCell >{row.protein}</TableCell>
+        <TableCell >{row.projectManager}</TableCell>
+        <TableCell >{row.approver}</TableCell>
+        <TableCell >{row.allocationStartDate.year}/{row.allocationStartDate.month}/{row.allocationStartDate.day}</TableCell>
+        <TableCell >{row.allocationEndDate.year}/{row.allocationEndDate.month}/{row.allocationEndDate.day}</TableCell>
+        <TableCell >{row.allocationStatus}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
@@ -83,9 +55,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                   <TableCell>Project Status</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell>2023/04/01</TableCell>
-                  <TableCell>2023/09/05</TableCell>
-                  <TableCell>Amber</TableCell>
+                  <TableCell>{row.projectStartDate.year}/{row.projectStartDate.month}/{row.projectStartDate.day}</TableCell>
+                  <TableCell>{row.projectEndDate.year}/{row.projectEndDate.month}/{row.projectEndDate.day}</TableCell>
+                  <TableCell>{row.projectStatus}</TableCell>
                 </TableRow>
               </Table>
               <Typography variant='h6'>
@@ -102,17 +74,13 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.date}
-                      </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell >{historyRow.amount}</TableCell>
-                      <TableCell >{historyRow.amount}</TableCell>
-                      <TableCell >
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
-                      </TableCell>
+                  {row.resources.map((resourcesRow) => (
+                    <TableRow key={resourcesRow.name}>
+                      <TableCell component="th" scope="row">{resourcesRow.name}</TableCell>
+                      <TableCell>{resourcesRow.approver}</TableCell>
+                      <TableCell >{resourcesRow.allocationStartDate.year}/{resourcesRow.allocationStartDate.month}/{resourcesRow.allocationStartDate.day}</TableCell>
+                      <TableCell >{resourcesRow.allocationEndDate.year}/{resourcesRow.allocationEndDate.month}/{resourcesRow.allocationEndDate.day}</TableCell>
+                      <TableCell >{resourcesRow.allocationStatus}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -125,18 +93,11 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   );
 }
 
-const initialRows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-  createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-  createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
-];
 
-export default function ProjectAllocation() {
+export default function ProjectAllocation(props:{projects: projectsData[]}) {
   const [searchText, setSearchText] = React.useState('');
   const [selectedOption, setSelectedOption] = React.useState<string>('');
-  const [rows, setRows] = React.useState(initialRows);
+  const [rows, setRows] = React.useState(props.projects);
 
   // Handle input change for search
   // Modify the event types to accept the correct parameters
@@ -147,8 +108,8 @@ export default function ProjectAllocation() {
   ) => {
     const text = value.toLowerCase();
     setSearchText(text);
-    const filteredRows = initialRows.filter((row) =>
-      row.name.toLowerCase().includes(text)
+    const filteredRows = props.projects.filter((row) =>
+      row.projectName.toLowerCase().includes(text)
     );
     setRows(filteredRows);
   };
@@ -176,7 +137,7 @@ export default function ProjectAllocation() {
                 freeSolo
                 id="free-solo-2-demo"
                 disableClearable
-                options={initialRows.map((option) => option.name)}
+                options={props.projects.map((option) => option.projectName)}
                 value={selectedOption}
                 onInputChange={handleSearchInputChange} // Handle input change
                 onChange={handleOptionSelect} // Handle option select
@@ -209,7 +170,7 @@ export default function ProjectAllocation() {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={row.name} row={row} />
+            <Row key={row.projectName} row={row} />
           ))}
         </TableBody>
       </Table>

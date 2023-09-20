@@ -43,6 +43,7 @@ export default function Sidebar() {
         setMobileOpen(!mobileOpen);
     };
 
+    
 
     const menuItems = [
         { text: "Dashboard", icon: <DashboardIcon /> },

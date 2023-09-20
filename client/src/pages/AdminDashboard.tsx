@@ -11,8 +11,8 @@ import {
   Typography,
 } from '@mui/material';
 import CakeIcon from '@mui/icons-material/Cake';
-import ProjectAllocation from '../components/ProjectAllocation';
-import EventCard from '../components/EventsCard';
+import AdminProjectAllocation from '../components/AdminProjectAllocation';
+import AdminEventCard from '../components/AdminEventsCard';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BirthdayCard from '../components/Birthdays';
 import HolidayCard from '../components/HolidayCard';
@@ -22,7 +22,7 @@ import { ToastContainer } from "react-toastify";
 import { useAuthCheck } from '../utils/useAuthCheck';
 import projectsData from '../models/ProjectsData';
 
-const Dashboard: React.FC = () => {
+const AdminDashboard: React.FC = () => {
 
   useAuthCheck();
 
@@ -35,16 +35,6 @@ const Dashboard: React.FC = () => {
   const toggleForm = () => {
     setFormVisible(!isFormVisible);
   };
-
-  useEffect(() => {
-    async function fetchData() {
-      const birthdayPerson = await api.getBirthdayPerson()
-      setBirthdays(birthdayPerson)
-    };
-    fetchData()
-
-  }, []);
-
 
   const demoData: projectsData[] = [
     {
@@ -153,8 +143,15 @@ const Dashboard: React.FC = () => {
       ],
     }
   ];
-  
 
+  useEffect(() => {
+    async function fetchData() {
+      const birthdayPerson = await api.getBirthdayPerson()
+      setBirthdays(birthdayPerson)
+    };
+    fetchData()
+
+  }, []);
 
   return (
     <div className="dashboard">
@@ -194,7 +191,7 @@ const Dashboard: React.FC = () => {
               </AccordionSummary>
               <AccordionDetails sx={{ padding: 0, maxHeight: 250, overflow: 'hidden', overflowY: 'scroll' }}>
                 <Typography>
-                  <ProjectAllocation projects={demoData} />
+                  <AdminProjectAllocation projects={demoData}/>
                 </Typography>
               </AccordionDetails>
             </Accordion>
@@ -211,7 +208,7 @@ const Dashboard: React.FC = () => {
                 </AccordionSummary>
                 <AccordionDetails sx={{ padding: 0, maxHeight: 200, overflow: 'hidden', overflowY: 'scroll' }}>
                   <Typography>
-                    <EventCard />
+                    <AdminEventCard />
                   </Typography>
                 </AccordionDetails>
               </Accordion>
@@ -240,4 +237,4 @@ const Dashboard: React.FC = () => {
 };
 
 
-export default Dashboard;
+export default AdminDashboard;

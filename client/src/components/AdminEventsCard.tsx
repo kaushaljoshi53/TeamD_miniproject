@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -67,9 +69,19 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell>{row.fat}</TableCell>
         <TableCell>{row.carbs}</TableCell>
         <TableCell>{row.protein}</TableCell>
+        <TableCell >
+                    <IconButton>
+                        <EditIcon />
+                    </IconButton>
+                </TableCell>
+                <TableCell >
+                    <IconButton>
+                        <DeleteIcon />
+                    </IconButton>
+                </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="subtitle2" gutterBottom component="div" sx={{ marginLeft: '8%' }}>
@@ -123,7 +135,7 @@ export default function EventCard() {
       <Table aria-label="collapsible table" size="small">
         <TableHead>
           <TableRow>
-            <TableCell colSpan={7}>
+            <TableCell colSpan={8}>
               <Autocomplete
                 freeSolo
                 id="free-solo-2-demo"
@@ -155,6 +167,8 @@ export default function EventCard() {
             <TableCell>Start Time</TableCell>
             <TableCell>End Date</TableCell>
             <TableCell>End Time</TableCell>
+            <TableCell>Edit</TableCell>
+            <TableCell>Delete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
