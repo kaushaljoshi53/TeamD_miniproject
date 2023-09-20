@@ -31,15 +31,16 @@ const Dashboard: React.FC = () => {
 
   const [isFormVisible, setFormVisible] = useState(false);
   const [birthdays, setBirthdays] = useState<BirthdayPerson[]>([]);
-
+  const [projects, setProjects] = useState<projectsData[]>([]);
   const toggleForm = () => {
     setFormVisible(!isFormVisible);
   };
 
   useEffect(() => {
     async function fetchData() {
-      const birthdayPerson = await api.getBirthdayPerson()
+      const birthdayPerson = await api.getBirthdayPerson();
       setBirthdays(birthdayPerson)
+      const dashboard:any = await api.getUserDashboard();
     };
     fetchData()
 
@@ -159,7 +160,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="dashboard">
       <div className="sidebar">
-        <Sidebar />
+        <Sidebar name='Kaushal' image='Kaushal Joshi' />
       </div>
       <div className="main">
         <ToastContainer/>

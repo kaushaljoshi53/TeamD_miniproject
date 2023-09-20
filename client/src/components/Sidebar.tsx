@@ -33,15 +33,15 @@ const drawerWidth = 240;
 
 
 
-export default function Sidebar() {
+export default function Sidebar(props:{name:string, image:string}) {
 
-    const Navigate = useNavigate();
 
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+
 
     
 
@@ -58,6 +58,7 @@ export default function Sidebar() {
         { text: "Resourcing", icon: <PeopleIcon /> },
     ];
 
+    const Navigate = useNavigate();
     const handleLogout = async () => {
         localStorage.removeItem('token');
         toast.success("Logged Out Successfully");
@@ -84,8 +85,8 @@ const drawer = (
         </List>
         <div className="footer" >
             <div className="profile">
-                <Avatar alt='abc' src='' sx={{ cursor: "pointer" }} />
-                <span>Kaushal</span>
+                <Avatar alt='abc' src={props.image} sx={{ cursor: "pointer" }} />
+                <span>{props.name}</span>
             </div>
             <IconButton aria-label='Logout' onClick={handleLogout}>
                 <LogoutIcon sx={{ color: "whitesmoke" }} />

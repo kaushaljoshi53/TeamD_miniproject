@@ -15,6 +15,8 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Autocomplete, TextField } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import EventForm from './EventsForm';
 
 function createData(
   name: string,
@@ -46,9 +48,13 @@ function createData(
   };
 }
 
+
 function Row(props: { row: ReturnType<typeof createData> }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
+
+
+ 
 
   return (
     <React.Fragment>
@@ -70,15 +76,15 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell>{row.carbs}</TableCell>
         <TableCell>{row.protein}</TableCell>
         <TableCell >
-                    <IconButton>
-                        <EditIcon />
-                    </IconButton>
-                </TableCell>
-                <TableCell >
-                    <IconButton>
-                        <DeleteIcon />
-                    </IconButton>
-                </TableCell>
+          <IconButton>
+            <EditIcon />
+          </IconButton>
+        </TableCell>
+        <TableCell >
+          <IconButton>
+            <DeleteIcon />
+          </IconButton>
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
@@ -130,12 +136,16 @@ export default function EventCard() {
     }
   };
 
+  const addEvent = ()=>{
+    
+  }
+
   return (
     <TableContainer component={Paper} sx={{ width: '100%', margin: 0 }}>
       <Table aria-label="collapsible table" size="small">
         <TableHead>
           <TableRow>
-            <TableCell colSpan={8}>
+            <TableCell colSpan={7}>
               <Autocomplete
                 freeSolo
                 id="free-solo-2-demo"
@@ -156,6 +166,11 @@ export default function EventCard() {
                   />
                 )}
               />
+            </TableCell>
+            <TableCell>
+              <IconButton onClick={addEvent}>
+                <AddIcon style={{ color: "#19015B", fontSize: 30 }} />
+              </IconButton>
             </TableCell>
           </TableRow>
         </TableHead>

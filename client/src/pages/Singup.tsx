@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import "../styles/Signup.css";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button, InputAdornment } from "@mui/material";
-import {userDataValidations} from "../utils/userDataValidation"; // Import validation functions
+import {userDataValidations} from "../utils/dataValidation"; // Import validation functions
 import {signUpRealTime} from "../utils/realTimeValidation";
-import { userdata } from "../models/Userdata";
+import userData from "../models/UserData";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -64,7 +64,7 @@ const Signup: React.FC = () => {
 
   // Handle form submission
   const handleSubmit = async () => {
-    const data: userdata = {
+    const data: userData = {
       firstName: firstName,
       lastName: lastName,
       email: email,

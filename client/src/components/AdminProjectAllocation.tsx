@@ -15,7 +15,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Autocomplete, AutocompleteInputChangeReason, TextField } from '@mui/material';
 import projectsData from '../models/ProjectsData';
-
+import AddIcon from '@mui/icons-material/Add';
 
 
 function Row(props: { row: projectsData }) {
@@ -124,7 +124,7 @@ export default function AdminProjectAllocation(props: { projects: projectsData[]
             <Table aria-label="collapsible table" size='small'>
                 <TableHead>
                     <TableRow>
-                        <TableCell colSpan={7}>
+                        <TableCell colSpan={6}>
                             <Autocomplete
                                 freeSolo
                                 id="free-solo-2-demo"
@@ -146,6 +146,11 @@ export default function AdminProjectAllocation(props: { projects: projectsData[]
                                     />
                                 )}
                             />
+                        </TableCell>
+                        <TableCell>
+                            <IconButton >
+                                <AddIcon style={{color:"#19015B",fontSize:30}} />
+                            </IconButton>
                         </TableCell>
                     </TableRow>
                 </TableHead>

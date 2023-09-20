@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import '../styles/Signin.css'
 import { TextField } from "@mui/material";
-import { userDataValidations } from "../utils/userDataValidation";
+import { userDataValidations } from "../utils/dataValidation";
 import { ToastContainer, toast } from "react-toastify";
 
 const jin = require("../assets/images/jin_login.png")

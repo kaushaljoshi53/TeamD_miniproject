@@ -1,10 +1,11 @@
 import { api } from "../services/Apis";
-import { userdata } from "../models/Userdata";
+import userData from "../models/UserData";
 import { signUpRealTime } from "./realTimeValidation";
+import eventsData from "../models/EventsData"
 
 export class userDataValidations {
 
-  static async signup(data: userdata, rePassword: string): Promise<string> {
+  static async signup(data: userData, rePassword: string): Promise<string> {
 
     if (data.email === '' ||
       data.employeeId === '' ||
@@ -57,5 +58,22 @@ export class userDataValidations {
 
     
 
+  }
+}
+
+
+export class eventsDataValidations {
+
+  static async addEvent(data:eventsData):Promise<string> {
+    if (data.eventName === '' ||
+    data.eventEndDate === ''||
+    data.eventEndTime === '' ||
+    data.eventStartDate === '' ||
+    data.eventStartTime === '' ||
+    data.eventVenue === ''){
+      return "Fill all the fields";
+    }
+    const response = await api.addEvent(data);
+    return response;
   }
 }

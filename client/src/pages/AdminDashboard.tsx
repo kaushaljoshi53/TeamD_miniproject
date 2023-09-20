@@ -1,7 +1,6 @@
 // Dashboard.tsx
-
-import React, { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
+import React, { useState, useEffect } from 'react';
 import '../styles/Dashboard.css';
 import {
   Accordion,
@@ -21,6 +20,7 @@ import { api } from '../services/Apis';
 import { ToastContainer } from "react-toastify";
 import { useAuthCheck } from '../utils/useAuthCheck';
 import projectsData from '../models/ProjectsData';
+import EventForm from '../components/EventsForm';
 
 const AdminDashboard: React.FC = () => {
 
@@ -146,20 +146,22 @@ const AdminDashboard: React.FC = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const birthdayPerson = await api.getBirthdayPerson()
+      const birthdayPerson = await api.getBirthdayPerson();
       setBirthdays(birthdayPerson)
+      const dashboard: any = await api.getAdminDashboard();
     };
     fetchData()
 
   }, []);
 
+
   return (
     <div className="dashboard">
       <div className="sidebar">
-        <Sidebar />
+        <Sidebar name='Kaushal' image='Kaushal Joshi' />
       </div>
       <div className="main">
-        <ToastContainer/>
+        <ToastContainer />
         <div className="header">
           <h2>Dashboard</h2>
           <p>
@@ -168,7 +170,7 @@ const AdminDashboard: React.FC = () => {
               <span>
                 <IconButton onClick={toggleForm}>
                   <CakeIcon
-                  className='cakeIcon'
+                    className='cakeIcon'
                     sx={{
                       color: '#19105B',
                       transform: 'translateY(-5px)',
@@ -185,18 +187,28 @@ const AdminDashboard: React.FC = () => {
             <Accordion sx={{ width: '100%' }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon sx={{ color: 'whitesmoke' }} />}
-                sx={{ backgroundColor: '#19015B', color: 'whitesmoke'}}
+                sx={{ backgroundColor: '#19015B', color: 'whitesmoke' }}
               >
                 <Typography >Projects Allocated</Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ padding: 0, maxHeight: 250, overflow: 'hidden', overflowY: 'scroll' }}>
                 <Typography>
-                  <AdminProjectAllocation projects={demoData}/>
+                  <AdminProjectAllocation projects={demoData} />
                 </Typography>
               </AccordionDetails>
             </Accordion>
           </div>
 
+          {isFormVisible && (
+            <div className="overlay">
+              <div className="modal-content">
+                <span className="close-button" onClick={toggleForm}>
+                  &times; {/* Close button (×) */}
+                </span>
+                <EventForm />
+              </div>
+            </div>
+          )}
           <div className="lower">
             <div className="events">
               <Accordion sx={{ width: '100%' }}>
@@ -224,7 +236,7 @@ const AdminDashboard: React.FC = () => {
                 </AccordionSummary>
                 <AccordionDetails sx={{ padding: 0, maxHeight: 200, overflow: 'hidden', overflowY: 'scroll' }}>
                   <Typography>
-                    <HolidayCard/>
+                    <HolidayCard />
                   </Typography>
                 </AccordionDetails>
               </Accordion>
