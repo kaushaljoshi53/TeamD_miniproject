@@ -1,15 +1,12 @@
-import React from "react";
-import { Routing } from "./routes/Routing";
-import "./styles/App.css"
+import React from 'react';
+import { Routing } from './routes/Routing';
 
-const App = ()=>{
-      
-    return(
-        <div className="App">
-            <Routing/>
-        </div>
-    );
+const App = () => {
+  return (
+      <div className="App">
+        <Routing />
+      </div>
+  );
 };
-
 
 export default App;

@@ -1,0 +1,154 @@
+.content{
+    margin-left: 240px
+    
+}
+
+.content-head{
+    padding: 0.25rem; 
+    height: 5rem;
+
+}
+
+.content-head h1{
+    margin: 0;
+    background-color: #FFE5EE;
+    color: #19105B; 
+    font-weight: 700;    
+}
+
+.info-div-head{
+    background-color: #19105B;
+    height: 2rem;
+}
+
+.info-div-head h3{
+    color: white;
+    font-weight: 700;
+    margin-left: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.info-content{
+    display: flex;
+    background-color: #FFE5EE;
+    border-radius: 0.25rem; 
+    height: 8rem; 
+}
+
+.fixed-content{
+    color: #19105B;
+    font-weight: 700;
+    margin-top: 1.75rem; 
+    margin-left: 2.5rem; 
+}
+
+.sec-card{
+    background-color: #19105B;
+    height: 2rem;
+    margin-top: 2rem;
+}
+
+.sec-card h3{
+    color: white;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 600px){
+.content {
+    padding: 20px;
+    margin-left: 234px;
+    height: 100vh;
+    overflow: hidden auto;
+}
+} 
+@media only screen and (max-width: 600px){
+.card{
+    margin-right: 20px;
+}
+
+} 
+
+.content-head h1{
+    margin: 0;
+    background-color: #19105B;
+    color: whitesmoke; 
+    font-weight: 700;    
+}
+
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+#dashboard .p-accordion-tab {
+    margin-top: .85px !important;
+}
+
+.p-accordion .p-accordion-tab.p-accordion-tab-active {
+    margin-bottom: 1rem;
+}
+
+#dashboard .p-accordion-tab .p-accordion-header .p-accordion-header-link {
+    padding: 10px !important;
+    background: #19105B !important;
+    color: white !important;
+    font-size: 13px !important;
+}
+
+thead{
+        display: table-header-group;
+        vertical-align: middle;
+        background-color: #FFE5EE;
+        color: #19105B;
+}
+
+.profile{
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem; 
+    padding-left: 0.5rem;
+    padding-right: 0.5rem; 
+    margin-top: 0.25rem; 
+    margin-bottom: 0.5rem; 
+    border-radius: 0.25rem; 
+    width: 100%; 
+}
+
+.btn-last{
+    float: right;
+    width: 100%;
+    margin:auto;
+    background-color: #FF095C;
+    cursor: pointer;
+    color: white;
+    padding: 0.35rem; 
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem; 
+    border-radius: 0.25rem; 
+    font-size: 0.875rem;
+    line-height: 1.25rem; 
+    font-weight: 500; 
+    text-align: center; 
+
+}
+.btn-last:hover{
+    background-color: #D50048;
+}

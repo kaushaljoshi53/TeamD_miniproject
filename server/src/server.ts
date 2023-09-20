@@ -1,17 +1,36 @@
-import express from "express";
-import http from "http";
-import cors from "cors";
+// Import required modules
+import dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors';
+import http from 'http';
+import router from './routes/router';
+import { dbConnect } from './database/dbConnect';
 
-import { Controller } from "./controllers/UserController";
-
-
+// Initialize Express application
 const app = express();
-app.use(cors())
 
-const httpServer = http.createServer(app)
+// Enable Cross-Origin Resource Sharing (CORS)
+app.use(cors());
 
+// Parse JSON request bodies
+app.use(express.json());
 
-const PORT = process.env.PORT || 8080
-httpServer.listen(PORT,()=>{
-    console.log(`Server running on port ${PORT}`);
-})
+// Use the defined router for routing requests
+app.use(router);
+
+// Create an HTTP server
+const httpServer = http.createServer(app);
+
+// Load environment variables from a .env file
+dotenv.config();
+
+// Define the port number for the server
+const PORT = process.env.PORT || 8080;
+
+// Start the HTTP server
+httpServer.listen(PORT, () => {
+    console.log(`Server running on port - ${PORT}`);
+});
+
+// Connect to the database
+dbConnect();

@@ -1,21 +1,23 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Dashboard } from '../pages/Dashboard';
-import { Signup } from '../pages/Singup';
-import { Signin } from '../pages/Signin';
-import { Admin } from '../pages/Admin';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Dashboard from '../pages/Dashboard';
+import Signup from '../pages/Singup';
+import Signin from '../pages/Signin';
+import AdminDashboard from '../pages/AdminDashboard';
+// import ProjectsForm from '../components/ProjectsForm';
+import EventForm from '../components/EventsForm';
+import MyProfile from '../pages/MyProfile';
 
-
-export const Routing = ()=>{
-    return(
-        <Router>
-            <Routes>
-                <Route path='/' element={<Signin/>}/>
-                <Route path='/signup' element={<Signup/>}/>
-                <Route path='/dashboard' element={<Dashboard/>}/>
-                <Route path='/admin' element={<Admin/>}/>
-                
-            </Routes>
-        </Router>
-    )
-}
+export const Routing = () => {
+    return (
+      <Router>
+        <Routes>
+          <Route path="/" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/form" element={<EventForm />} />
+          <Route path="/admindashboard" element={<AdminDashboard />} />
+          <Route path="/MyProfile" element={<MyProfile />} />
+        </Routes>
+      </Router>
+    );
+  };
