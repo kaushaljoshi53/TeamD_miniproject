@@ -31,6 +31,9 @@ class Apis {
             if (response.status === 201) {
 
                 localStorage.setItem('token', response.data.token);
+                
+                console.log(response);
+                
 
                 return response.data.message;
             }
@@ -80,66 +83,6 @@ class Apis {
     }
 
 
-    async getUserDashboard(): Promise<any> {
-        try {
-
-            const token = localStorage.getItem('token')
-
-            const headers = {
-                'Authorization': `Bearer ${token}`,
-              };
-
-            const response = await axios.get("http://localhost:8080/api/getUserDashboard",{headers})
-
-            if (response.status === 201) {
-                return response.data
-            }
-            else{
-                return "Problem in fetching project data."
-            }
-        } catch (error) {
-            console.error(error);
-            
-        }
-    }
-    async getAdminDashboard(): Promise<any> {
-        try {
-
-            const token = localStorage.getItem('token')
-
-            const headers = {
-                'Authorization': `Bearer ${token}`,
-              };
-
-            const response = await axios.get("http://localhost:8080/api/getAdminDashboard",{headers})
-
-            if (response.status === 201) {
-                return response.data
-            }
-            else{
-                return "Problem in fetching project data."
-            }
-        } catch (error) {
-            console.error(error);
-            
-        }
-    }
-
-
-    async addEvent(data: eventsData): Promise<any> {
-        try {
-            const response = await axios.post("http://localhost:8080/api/addevent", data);
-            if (response.status === 200){
-                return "Event Added Successfully";
-            }
-            else {
-                return "Something Went Wrong";
-            }
-        } catch (error) {
-            console.error(error);
-            
-        }
-    }
 }
 
 

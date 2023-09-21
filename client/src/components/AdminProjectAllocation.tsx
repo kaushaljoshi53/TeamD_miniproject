@@ -13,12 +13,12 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { Autocomplete, AutocompleteInputChangeReason, TextField } from '@mui/material';
-import projectsData from '../models/ProjectsData';
+import { Autocomplete, AutocompleteInputChangeReason, Modal, TextField } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import ProjectForm from './ProjectsForm';
 
 
-function Row(props: { row: projectsData }) {
+function Row(props: { row: any }) {
     const { row } = props;
     const [open, setOpen] = React.useState(false);
 
@@ -65,7 +65,7 @@ function Row(props: { row: projectsData }) {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {row.resources.map((resourcesRow) => (
+                                    {row.resources.map((resourcesRow:any) => (
                                         <TableRow key={resourcesRow.name}>
                                             <TableCell component="th" scope="row">{resourcesRow.name}</TableCell>
                                             <TableCell >{resourcesRow.approver}</TableCell>
@@ -86,7 +86,7 @@ function Row(props: { row: projectsData }) {
 
 
 
-export default function AdminProjectAllocation(props: { projects: projectsData[] }) {
+export default function AdminProjectAllocation(props: { projects: any[] }) {
     const [searchText, setSearchText] = React.useState('');
     const [selectedOption, setSelectedOption] = React.useState<string>('');
     const [rows, setRows] = React.useState(props.projects);
@@ -118,6 +118,10 @@ export default function AdminProjectAllocation(props: { projects: projectsData[]
         }
     };
 
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+  
 
     return (
         <TableContainer component={Paper} sx={{ width: "100%", margin: 0 }}>
@@ -148,10 +152,18 @@ export default function AdminProjectAllocation(props: { projects: projectsData[]
                             />
                         </TableCell>
                         <TableCell>
-                            <IconButton >
-                                <AddIcon style={{color:"#19015B",fontSize:30}} />
+                            <IconButton onClick={handleOpen}>
+                                <AddIcon style={{ color: "#19015B", fontSize: 30 }} />
                             </IconButton>
                         </TableCell>
+                        <Modal
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <ProjectForm />
+                        </Modal>
                     </TableRow>
                 </TableHead>
                 <TableHead sx={{ backgroundColor: "#FFE5EE" }}>
@@ -159,8 +171,8 @@ export default function AdminProjectAllocation(props: { projects: projectsData[]
                         <TableCell />
                         <TableCell>Project Name</TableCell>
                         <TableCell >Project Manager</TableCell>
-                        <TableCell >Allocation Start Date</TableCell>
-                        <TableCell >Allocation End Date</TableCell>
+                        <TableCell >Start Date</TableCell>
+                        <TableCell >End Date</TableCell>
                         <TableCell >Project Status</TableCell>
                         <TableCell >Edit</TableCell>
 

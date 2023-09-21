@@ -1,10 +1,9 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { signUpBackend } from '../utils/userDataValidation';
 import User from '../models/userData';
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv';
-import { strict } from 'assert';
 
 dotenv.config();
 
@@ -31,7 +30,7 @@ class UserController {
    * @param {Response} res - Express response object.
    * @param {NextFunction} next - Express next middleware function.
    */
-  public async signup(req: Request, res: Response, next: NextFunction) {
+  public async signup(req: Request, res: Response) {
     try {
       const data = req.body;
 
@@ -69,7 +68,6 @@ class UserController {
       const emailExists = await User.findOne({ where: { email: data.email } });
       data.employeeId = 'JMD' + data.employeeId;
       const employeeIdExists = await User.findOne({ where: { employeeId: data.employeeId } });
-      console.log("asadasdasd", employeeIdExists);
 
       if (!!emailExists && !!employeeIdExists) {
         return res.status(409).json({ message: 'User with email and empId already exists.' });
@@ -100,7 +98,7 @@ class UserController {
     }
   }
 
-  public async signin(req: Request, res: Response, next: NextFunction) {
+  public async signin(req: Request, res: Response) {
     try {
       const data = req.body;
       if (UserController.hasNullValues(data)) {
@@ -121,22 +119,7 @@ class UserController {
 
       const token = jwt.sign({ employeeId: user.employeeId, email: user.email, firstName: user.firstName }, securityKey, { expiresIn: '1h' });
 
-      const cookieOptions = {
-
-        expires:
-
-          new Date(
-
-            Date.now() + (parseInt(process.env.JWT_COOKIE_EXPIRES as string) || 1) * 24 * 60 * 60 * 1000
-
-          ),
-
-        httpOnly: true,
-
-      };
-
-
-      return res.cookie('token',token,cookieOptions).status(201).json({ message: "Logged In Successfully", token: token, isAdmin: user.isAdmin });
+      return res.status(201).json({ message: "Logged In Successfully", token: token});
 
 
     } catch (error) {
@@ -144,4 +127,5 @@ class UserController {
     }
   }
 }
+
 export default UserController;

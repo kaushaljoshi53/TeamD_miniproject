@@ -17,6 +17,8 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Autocomplete, TextField } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import EventForm from './EventsForm';
+import Modal from '@mui/material/Modal';
+
 
 function createData(
   name: string,
@@ -54,7 +56,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   const [open, setOpen] = React.useState(false);
 
 
- 
+
 
   return (
     <React.Fragment>
@@ -136,9 +138,9 @@ export default function EventCard() {
     }
   };
 
-  const addEvent = ()=>{
-    
-  }
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <TableContainer component={Paper} sx={{ width: '100%', margin: 0 }}>
@@ -168,9 +170,17 @@ export default function EventCard() {
               />
             </TableCell>
             <TableCell>
-              <IconButton onClick={addEvent}>
+              <IconButton onClick={handleOpen}>
                 <AddIcon style={{ color: "#19015B", fontSize: 30 }} />
               </IconButton>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <EventForm />
+              </Modal>
             </TableCell>
           </TableRow>
         </TableHead>

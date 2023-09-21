@@ -1,9 +1,8 @@
 export default interface eventsData {
     eventName: string;
-    eventStartDate: string;
-    eventStartTime: string;
-    eventEndDate: string;
-    eventEndTime: string;
+    eventDate: string;
+    startTime: string;
+    endTime: string;
     eventOrganiser: string;
     eventVenue: string;
 }

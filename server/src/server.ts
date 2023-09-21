@@ -3,7 +3,9 @@ import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import http from 'http';
-import router from './routes/router';
+import router from './routes/userRoutes';
+import eventRoutes from './routes/eventRoutes';
+import projectRoutes from './routes/projectRoutes'
 import { dbConnect } from './database/dbConnect';
 
 // Initialize Express application
@@ -17,6 +19,8 @@ app.use(express.json());
 
 // Use the defined router for routing requests
 app.use(router);
+app.use(eventRoutes);
+app.use(projectRoutes);
 
 // Create an HTTP server
 const httpServer = http.createServer(app);

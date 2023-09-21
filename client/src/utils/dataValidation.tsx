@@ -2,6 +2,8 @@ import { api } from "../services/Apis";
 import userData from "../models/UserData";
 import { signUpRealTime } from "./realTimeValidation";
 import eventsData from "../models/EventsData"
+import { eventApi } from "../services/EventApis";
+import { projectApi } from "../services/ProjectApis";
 
 export class userDataValidations {
 
@@ -47,16 +49,16 @@ export class userDataValidations {
   }
 
 
-  static async signin(email:string, password:string): Promise<any>{
-    
-    if (email === '' || password === ''){
+  static async signin(email: string, password: string): Promise<any> {
+
+    if (email === '' || password === '') {
       return "Fill The Credentials"
     }
-    const message = await api.signin(email,password);
-    
+    const message = await api.signin(email, password);
+
     return message;
 
-    
+
 
   }
 }
@@ -64,16 +66,62 @@ export class userDataValidations {
 
 export class eventsDataValidations {
 
-  static async addEvent(data:eventsData):Promise<string> {
+  static async addEvent(data: eventsData): Promise<string> {
+
+
     if (data.eventName === '' ||
-    data.eventEndDate === ''||
-    data.eventEndTime === '' ||
-    data.eventStartDate === '' ||
-    data.eventStartTime === '' ||
-    data.eventVenue === ''){
+      data.endTime === '' ||
+      data.eventDate === '' ||
+      data.startTime === '' ||
+      data.eventVenue === '') {
       return "Fill all the fields";
     }
-    const response = await api.addEvent(data);
+    const response = await eventApi.addEvent(data);
     return response;
   }
+}
+
+
+
+export class projectValidations {
+
+  static async addProject(data: any) :Promise<string>{
+    // Destructure the data object to get individual field values
+    const {
+      projectName,
+      projectManager,
+      projectStartDate,
+      projectEndDate,
+      projectStatus,
+      resources,
+    } = data;
+
+    // Check if any of the main fields are empty
+    if (
+      projectName.trim() === '' ||
+      projectManager.trim() === '' ||
+      projectStartDate.trim() === '' ||
+      projectEndDate.trim() === '' ||
+      projectStatus.trim() === ''
+    ) {
+      return "All Fields Must Be Filled";
+    }
+
+    // Check if any resource fields are empty
+    for (const resource of resources) {
+      if (
+        resource.name.trim() === '' ||
+        resource.approverName.trim() === '' ||
+        resource.allocationStartDate.trim() === '' ||
+        resource.allocationEndDate.trim() === '' ||
+        resource.allocationStatus.trim() === ''
+      ) {
+        return "All Fields Must Be Filled";
+      }
+    }
+    log
+    const message = await projectApi.addProject(data);
+    return message;
+  }
+
 }

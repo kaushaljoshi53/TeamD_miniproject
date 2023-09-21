@@ -16,7 +16,7 @@ import { Autocomplete, AutocompleteInputChangeReason, TextField } from '@mui/mat
 import projectsData from '../models/ProjectsData';
 
 
-function Row(props: { row: projectsData}) {
+function Row(props: { row: any}) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
@@ -74,7 +74,7 @@ function Row(props: { row: projectsData}) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.resources.map((resourcesRow) => (
+                  {row.resources.map((resourcesRow:any) => (
                     <TableRow key={resourcesRow.name}>
                       <TableCell component="th" scope="row">{resourcesRow.name}</TableCell>
                       <TableCell>{resourcesRow.approver}</TableCell>
@@ -94,7 +94,7 @@ function Row(props: { row: projectsData}) {
 }
 
 
-export default function ProjectAllocation(props:{projects: projectsData[]}) {
+export default function ProjectAllocation(props:{projects: any[]}) {
   const [searchText, setSearchText] = React.useState('');
   const [selectedOption, setSelectedOption] = React.useState<string>('');
   const [rows, setRows] = React.useState(props.projects);
