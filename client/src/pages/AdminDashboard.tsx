@@ -21,16 +21,20 @@ import { ToastContainer } from "react-toastify";
 import { useAuthCheck } from '../utils/useAuthCheck';
 import projectsData from '../models/ProjectsData';
 import EventForm from '../components/EventsForm';
+import {projectApi} from '../services/ProjectApis';
+import { useNavigate } from 'react-router-dom';
 
 const AdminDashboard: React.FC = () => {
 
   useAuthCheck();
 
+  const navigate = useNavigate();
 
   const today: string = new Date().toDateString();
 
   const [isFormVisible, setFormVisible] = useState(false);
   const [birthdays, setBirthdays] = useState<BirthdayPerson[]>([]);
+  const [projects, setProjects] = useState<any[]>([])
 
   const toggleForm = () => {
     setFormVisible(!isFormVisible);
@@ -38,15 +42,21 @@ const AdminDashboard: React.FC = () => {
 
   const demoData: any[] = [];
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const birthdayPerson = await api.getBirthdayPerson();
-  //     setBirthdays(birthdayPerson)
-  //     const dashboard: any = await api.getAdminDashboard();
-  //   };
-  //   fetchData()
+  useEffect(() => {
+    async function fetchData() {
+      const birthdayPerson = await api.getBirthdayPerson();
+      setBirthdays(birthdayPerson)
 
-  // }, []);
+      const projects = await projectApi.getProjects(); 
+      if (projects === "Not Logged In"){
+        navigate('/');
+
+      setProjects(projects);
+      }
+    };
+    fetchData()
+
+  }, []);
 
 
   return (
@@ -93,16 +103,6 @@ const AdminDashboard: React.FC = () => {
             </Accordion>
           </div>
 
-          {isFormVisible && (
-            <div className="overlay">
-              <div className="modal-content">
-                <span className="close-button" onClick={toggleForm}>
-                  &times; {/* Close button (×) */}
-                </span>
-                <EventForm />
-              </div>
-            </div>
-          )}
           <div className="lower">
             <div className="events">
               <Accordion sx={{ width: '100%' }}>

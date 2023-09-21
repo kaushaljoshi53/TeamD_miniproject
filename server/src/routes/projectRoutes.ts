@@ -7,7 +7,7 @@ const projectRoutes = Router();
 const ProjectControllerObj = new ProjectController();
 
 projectRoutes.post('/api/addprojects',ProjectControllerObj.addProject);
-// projectRoutes.post('/api/getprojects',ProjectControllerObj.getProject);
+projectRoutes.get('/api/getprojects',ProjectControllerObj.getProject);
 
 
 export default projectRoutes;

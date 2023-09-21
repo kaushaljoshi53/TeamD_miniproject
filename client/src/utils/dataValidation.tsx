@@ -119,7 +119,6 @@ export class projectValidations {
         return "All Fields Must Be Filled";
       }
     }
-    log
     const message = await projectApi.addProject(data);
     return message;
   }

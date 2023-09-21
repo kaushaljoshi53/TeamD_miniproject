@@ -117,7 +117,8 @@ class UserController {
 
       const securityKey = process.env.JWT_KEY || 'abcd';
 
-      const token = jwt.sign({ employeeId: user.employeeId, email: user.email, firstName: user.firstName }, securityKey, { expiresIn: '1h' });
+    
+      const token = jwt.sign({user}, securityKey, { expiresIn: '1h' });
 
       return res.status(201).json({ message: "Logged In Successfully", token: token});
 

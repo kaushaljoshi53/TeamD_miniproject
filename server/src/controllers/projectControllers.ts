@@ -2,8 +2,12 @@ import { Request, Response } from 'express';
 import hasNullValues from '../utils/hasNullValues';
 import projectValidation from '../utils/projectValidation';
 import Projects from '../models/projects';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+import { ifError } from 'assert';
 
 
+dotenv.config();
 class ProjectController {
 
 
@@ -37,8 +41,8 @@ class ProjectController {
             if (!! projectExists) {
                 return res.status(209).json({message: "Project Already Exists"});
             }
-            data.resource.forEach(async (element: { name: any; approver: any; allocationStartDate: any; allocationEndDate: any; }) => {
-
+            for(let i=0;i<data.resources.length;i++){
+            const element = data.resources[i]
                 const rows = {
                     projectName:data.projectName,
                     projectManager:data.projectManager,
@@ -46,16 +50,17 @@ class ProjectController {
                     projectEndDate:data.projectEndDate,
                     projectStatus:data.projectStatus,
                     resource:element.name,
-                    approver:element.approver,
+                    approver:element.approverName,
                     allocationStartDate:element.allocationStartDate,
                     allocationEndDate:element.allocationEndDate,
+                    allocationStatus:element.allocationStatus
                 }
-                const create = await Projects.create(rows);
-                if (! create){
-                    res.status(209).json({message:"Error Creating Table"});
-                }
-            });
-
+                await Projects.create(rows).then(()=>{
+                    if(i==data.resources.length-1){
+                        res.json({message:"created"})
+                    }
+                })
+        }
         }
         catch (error) {
             console.error(error);
@@ -63,6 +68,58 @@ class ProjectController {
         }
     }
 
+    private static async verifyToken(token:string){
+
+        const key = process.env.JWT_KEY
+        if(key){
+            const decoded:any = await jwt.verify(token,key)
+            console.log("decoded",decoded);
+            
+            if (decoded.user) {
+                return decoded.user;
+            }
+            else{
+                return false;
+            }
+
+        }
+    }
+    public async getProject(req:Request, res: Response) {
+        
+        const token:string|undefined = req.headers.authorization;
+        console.log("token",token);
+        
+
+        if (token) {
+            const verifiedUser:any = await ProjectController.verifyToken(token);
+            if (verifiedUser) {
+                if (verifiedUser.isAdmin){
+                    const projectsData = await Projects.findAll();
+                    
+                    if (projectsData){
+                        res.status(200).json({projectsData});
+                    }
+                    else {
+                        res.status(209).json({message:"No Record Found"});
+                    }
+                }
+                else {
+                    const projectsData = await Projects.findAll({where:{resource:verifiedUser.employeeId}});
+                    if (projectsData){
+                        res.status(200).json({projectsData});
+                    }
+                    else {
+                        res.status(209).json({message:"No Record Found"});
+                    }
+                }
+            }
+
+        }
+        else {
+            res.status(203).json({message:"Token Expired"});
+        }
+
+    }
 }
 
 

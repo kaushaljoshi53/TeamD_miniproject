@@ -24,43 +24,33 @@ Projects.init(
     {
         projectName: {
             type: DataTypes.STRING,
-            allowNull: false,
         },
         projectManager: {
             type: DataTypes.STRING,
-            allowNull: false,
         },
         approver: {
             type: DataTypes.STRING,
-            allowNull: false,
         },
         resource: {
             type: DataTypes.STRING,
-            allowNull: false,
         },
         allocationStartDate: {
             type: DataTypes.DATE,
-            allowNull: false,
         },
         allocationEndDate: {
             type: DataTypes.DATE,
-            allowNull: false,
         },
         projectStartDate: {
             type: DataTypes.DATE,
-            allowNull: false,
         },
         projectEndDate: {
             type: DataTypes.DATE,
-            allowNull: false,
         },
         projectStatus: {
             type: DataTypes.STRING,
-            allowNull: false,
         },
         allocationStatus: {
             type: DataTypes.STRING,
-            allowNull: false,
         },
         softDeleted: {
             type: DataTypes.BOOLEAN,

@@ -4,8 +4,8 @@
 export default class eventValidation {
 
     public static isValidDateFormat(dateString: string): boolean {
-        // Regular expression pattern for validating "yyyy/mm/dd" date format
-        const dateFormatPattern = /^\d{4}\/\d{2}\/\d{2}$/;
+        // Regular expression pattern for validating "dd/mm/yyyy" date format
+        const dateFormatPattern = /^(\d{2})\/(\d{2})\/(\d{4})$/;
       
         return dateFormatPattern.test(dateString);
       }

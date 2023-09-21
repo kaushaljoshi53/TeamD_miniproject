@@ -25,11 +25,7 @@ const Signin = () => {
         const response = await userDataValidations.signin(email, password) || '';
 
         if (response === "Logged In Successfully") {
-            toast.success(response);
-            setTimeout(() => {
                 Navigate('/dashboard')
-            },
-                2000)
         }
         else if (response === "Invalid Credentials") {
             toast.error("Invalid Credentials");

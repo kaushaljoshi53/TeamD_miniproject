@@ -75,7 +75,7 @@ function EventForm() {
                         />
                     </div>
                     <div>
-                        <InputLabel htmlFor="Date">Start Date (YYYY/MM/DD)</InputLabel>
+                        <InputLabel htmlFor="Date">Start Date (DD/MM/YYYY)</InputLabel>
                         <TextField
                             size='small'
                             fullWidth
