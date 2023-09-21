@@ -7,6 +7,6 @@ const eventRoutes = Router();
 const eventController = new EventController();
 
 eventRoutes.post('/api/addevents',eventController.addEvent);
-// eventRoutes.post('/api/getprojects',eventController.getProject);
+// eventRoutes.get('/api/getprojects',eventController.getProject);
 
 export default eventRoutes;

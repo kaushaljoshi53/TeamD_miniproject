@@ -38,8 +38,8 @@ function Row(props: { row: any }) {
                     {row.projectName}
                 </TableCell>
                 <TableCell >{row.projectManager}</TableCell>
-                <TableCell >{row.projectStartDate.year}/{row.projectStartDate.month}/{row.projectStartDate.day}</TableCell>
-                <TableCell >{row.projectEndDate.year}/{row.projectEndDate.month}/{row.projectEndDate.day}</TableCell>
+                <TableCell >{row.projectStartDate}</TableCell>
+                <TableCell >{row.projectEndDate}</TableCell>
                 <TableCell >{row.projectStatus}</TableCell>
                 <TableCell >
                     <IconButton>
@@ -69,8 +69,8 @@ function Row(props: { row: any }) {
                                         <TableRow key={resourcesRow.name}>
                                             <TableCell component="th" scope="row">{resourcesRow.name}</TableCell>
                                             <TableCell >{resourcesRow.approver}</TableCell>
-                                            <TableCell>{resourcesRow.allocationStartDate.year}/{resourcesRow.allocationStartDate.month}/{resourcesRow.allocationStartDate.day}</TableCell>
-                                            <TableCell >{resourcesRow.allocationEndDate.year}/{resourcesRow.allocationEndDate.month}/{resourcesRow.allocationEndDate.day}</TableCell>
+                                            <TableCell>{resourcesRow.allocationStartDate}</TableCell>
+                                            <TableCell >{resourcesRow.allocationEndDate}</TableCell>
                                             <TableCell >{resourcesRow.allocationStatus}</TableCell>
                                         </TableRow>
                                     ))}
@@ -87,35 +87,41 @@ function Row(props: { row: any }) {
 
 
 export default function AdminProjectAllocation(props: { projects: any[] }) {
-    const [searchText, setSearchText] = React.useState('');
-    const [selectedOption, setSelectedOption] = React.useState<string>('');
+    const [searchText, setSearchText] = React.useState<string | null>(null);
+    const [selectedOption, setSelectedOption] = React.useState<string | null>(null);
+  
+    // Initialize rows with the provided projects data
+    console.log("sdawfa",props.projects);
+    
     const [rows, setRows] = React.useState(props.projects);
-
+  
     // Handle input change for search
-    // Modify the event types to accept the correct parameters
     const handleSearchInputChange = (
-        event: React.ChangeEvent<{}>, // Change the event type
-        value: string,
-        reason: AutocompleteInputChangeReason
+      event: React.ChangeEvent<{}>,
+      value: string,
+      reason: AutocompleteInputChangeReason
     ) => {
-        const text = value.toLowerCase();
-        setSearchText(text);
-        const filteredRows = props.projects.filter((row) =>
-            row.projectName.toLowerCase().includes(text)
-        );
-        setRows(filteredRows);
+      const text = value.toLowerCase();
+      setSearchText(text);
+  
+      // Filter the projects based on the search input and set the filtered data in rows
+      const filteredRows = props.projects.filter((row) =>
+        row.projectName.toLowerCase().includes(text)
+      );
+      setRows(filteredRows);
     };
-
+  
+    // Handle option select for search
     const handleOptionSelect = (
-        event: React.ChangeEvent<{}>, // Change the event type
-        value: string | null
+      event: React.ChangeEvent<{}>,
+      value: string | null
     ) => {
-        if (value) {
-            setSelectedOption(value);
-            setSearchText(value.toLowerCase());
-        } else {
-            setSelectedOption('');
-        }
+      if (value) {
+        setSelectedOption(value);
+        setSearchText(value.toLowerCase());
+      } else {
+        setSelectedOption(null);
+      }
     };
 
     const [open, setOpen] = React.useState(false);

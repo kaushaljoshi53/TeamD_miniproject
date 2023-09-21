@@ -1,4 +1,6 @@
 import axios from "axios";
+import projectsData from "../models/ProjectsData";
+import { mapProjectsToProjectsData } from "../models/ProjectsData";
 
 class ProjectApis {
 
@@ -20,18 +22,23 @@ class ProjectApis {
     }
 
     async getProjects(): Promise<any> {
-        console.log("here");
-        
+
         try {
 
             const token = localStorage.getItem('token');
-            
+
             if (token) {
                 const response = await axios.get("http://localhost:8080/api/getprojects", { headers: { Authorization: token } });
-                if (response.status === 200){    
-                    return response.data.projectsData
+                if (response.status === 200) {
+                    const data = response.data.projectsData;
+                    if (data.length>0) {
+                        const projects: projectsData[] = mapProjectsToProjectsData(data);
+                        console.log(projects);
+                        return projects
+                    }
+                    return [];
                 }
-                if (response.status === 203){
+                if (response.status === 203) {
                     return "Not Logged In"
                 }
             }

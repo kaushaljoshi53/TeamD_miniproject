@@ -37,8 +37,8 @@ function Row(props: { row: any}) {
         </TableCell>
         <TableCell >{row.projectManager}</TableCell>
         <TableCell >{row.approver}</TableCell>
-        <TableCell >{row.allocationStartDate.year}/{row.allocationStartDate.month}/{row.allocationStartDate.day}</TableCell>
-        <TableCell >{row.allocationEndDate.year}/{row.allocationEndDate.month}/{row.allocationEndDate.day}</TableCell>
+        <TableCell >{row.allocationStartDate}</TableCell>
+        <TableCell >{row.allocationEndDate}</TableCell>
         <TableCell >{row.allocationStatus}</TableCell>
       </TableRow>
       <TableRow>
@@ -55,8 +55,8 @@ function Row(props: { row: any}) {
                   <TableCell>Project Status</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell>{row.projectStartDate.year}/{row.projectStartDate.month}/{row.projectStartDate.day}</TableCell>
-                  <TableCell>{row.projectEndDate.year}/{row.projectEndDate.month}/{row.projectEndDate.day}</TableCell>
+                  <TableCell>{row.projectStartDate}</TableCell>
+                  <TableCell>{row.projectEndDate}</TableCell>
                   <TableCell>{row.projectStatus}</TableCell>
                 </TableRow>
               </Table>
@@ -78,8 +78,8 @@ function Row(props: { row: any}) {
                     <TableRow key={resourcesRow.name}>
                       <TableCell component="th" scope="row">{resourcesRow.name}</TableCell>
                       <TableCell>{resourcesRow.approver}</TableCell>
-                      <TableCell >{resourcesRow.allocationStartDate.year}/{resourcesRow.allocationStartDate.month}/{resourcesRow.allocationStartDate.day}</TableCell>
-                      <TableCell >{resourcesRow.allocationEndDate.year}/{resourcesRow.allocationEndDate.month}/{resourcesRow.allocationEndDate.day}</TableCell>
+                      <TableCell >{resourcesRow}/{resourcesRow.allocationStartDate.day}</TableCell>
+                      <TableCell >{resourcesRow.allocationEndDate}</TableCell>
                       <TableCell >{resourcesRow.allocationStatus}</TableCell>
                     </TableRow>
                   ))}

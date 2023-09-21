@@ -21,6 +21,7 @@ import { api } from '../services/Apis';
 import { ToastContainer } from "react-toastify";
 import { useAuthCheck } from '../utils/useAuthCheck';
 import projectsData from '../models/ProjectsData';
+import { projectApi } from '../services/ProjectApis';
 
 const Dashboard: React.FC = () => {
 
@@ -36,19 +37,24 @@ const Dashboard: React.FC = () => {
     setFormVisible(!isFormVisible);
   };
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const birthdayPerson = await api.getBirthdayPerson();
-  //     setBirthdays(birthdayPerson)
-  //     const dashboard:any = await api.getUserDashboard();
-  //   };
-  //   fetchData()
+  useEffect(() => {
+    async function fetchData() {
+      const birthdayPerson = await api.getBirthdayPerson();
 
-  // }, []);
+      const project = await projectApi.getProjects();
+      console.log(project);
+      if (project.length > 0) {
+        setProjects(project);
+
+      }
+    };
+    fetchData()
+
+  }, []);
 
 
   const demoData: any[] = [];
-  
+
 
 
   return (
@@ -57,7 +63,7 @@ const Dashboard: React.FC = () => {
         <Sidebar name='Kaushal' image='Kaushal Joshi' />
       </div>
       <div className="main">
-        <ToastContainer/>
+        <ToastContainer />
         <div className="header">
           <h2>Dashboard</h2>
           <p>
@@ -66,7 +72,7 @@ const Dashboard: React.FC = () => {
               <span>
                 <IconButton onClick={toggleForm}>
                   <CakeIcon
-                  className='cakeIcon'
+                    className='cakeIcon'
                     sx={{
                       color: '#19105B',
                       transform: 'translateY(-5px)',
@@ -83,7 +89,7 @@ const Dashboard: React.FC = () => {
             <Accordion sx={{ width: '100%' }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon sx={{ color: 'whitesmoke' }} />}
-                sx={{ backgroundColor: '#19015B', color: 'whitesmoke'}}
+                sx={{ backgroundColor: '#19015B', color: 'whitesmoke' }}
               >
                 <Typography >Projects Allocated</Typography>
               </AccordionSummary>
@@ -122,7 +128,7 @@ const Dashboard: React.FC = () => {
                 </AccordionSummary>
                 <AccordionDetails sx={{ padding: 0, maxHeight: 200, overflow: 'hidden', overflowY: 'scroll' }}>
                   <Typography>
-                    <HolidayCard/>
+                    <HolidayCard />
                   </Typography>
                 </AccordionDetails>
               </Accordion>

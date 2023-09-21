@@ -40,23 +40,25 @@ const AdminDashboard: React.FC = () => {
     setFormVisible(!isFormVisible);
   };
 
-  const demoData: any[] = [];
+// const demo:any[] = [];
 
   useEffect(() => {
     async function fetchData() {
       const birthdayPerson = await api.getBirthdayPerson();
       setBirthdays(birthdayPerson)
 
-      const projects = await projectApi.getProjects(); 
-      if (projects === "Not Logged In"){
-        navigate('/');
+      const project = await projectApi.getProjects(); 
+      console.log(project);
+      if (project.length > 0){
+        setProjects(project);
 
-      setProjects(projects);
       }
     };
     fetchData()
 
   }, []);
+
+  // console.log("asdasd",projects);
 
 
   return (
@@ -97,7 +99,7 @@ const AdminDashboard: React.FC = () => {
               </AccordionSummary>
               <AccordionDetails sx={{ padding: 0, maxHeight: 250, overflow: 'hidden', overflowY: 'scroll' }}>
                 <Typography>
-                  <AdminProjectAllocation projects={demoData} />
+                  <AdminProjectAllocation projects={projects} />
                 </Typography>
               </AccordionDetails>
             </Accordion>

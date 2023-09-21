@@ -97,19 +97,19 @@ class ProjectController {
                     const projectsData = await Projects.findAll();
                     
                     if (projectsData){
-                        res.status(200).json({projectsData});
+                        res.status(200).json({projectsData,isAdmin:true});
                     }
                     else {
-                        res.status(209).json({message:"No Record Found"});
+                        res.status(209).json({message:"No Record Found",isAdmin:true});
                     }
                 }
                 else {
                     const projectsData = await Projects.findAll({where:{resource:verifiedUser.employeeId}});
                     if (projectsData){
-                        res.status(200).json({projectsData});
+                        res.status(200).json({projectsData,isAdmin:false});
                     }
                     else {
-                        res.status(209).json({message:"No Record Found"});
+                        res.status(209).json({message:"No Record Found",isAdmin:false});
                     }
                 }
             }

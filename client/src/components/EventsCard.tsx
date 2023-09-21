@@ -15,32 +15,16 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Autocomplete, TextField } from '@mui/material';
 
 function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-  price: number,
+  event: string,
+  date: string,
+  startTime: string,
+  endTime: string,
 ) {
   return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      {
-        date: '2020-01-05',
-        customerId: '11091700',
-        amount: 3,
-      },
-      {
-        date: '2020-01-02',
-        customerId: 'Anonymous',
-        amount: 1,
-      },
-    ],
+    event,
+    date,
+    startTime,
+    endTime,
   };
 }
 
@@ -61,12 +45,12 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.name}
+          {row.event}
         </TableCell>
-        <TableCell>{row.calories}</TableCell>
-        <TableCell>{row.fat}</TableCell>
-        <TableCell>{row.carbs}</TableCell>
-        <TableCell>{row.protein}</TableCell>
+        <TableCell>{row.date}</TableCell>
+        <TableCell>{row.startTime}</TableCell>
+        <TableCell>{row.endTime}</TableCell>
+
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -84,11 +68,11 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 }
 
 const initialRows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-  createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-  createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
+  createData('Event 1', '2023-09-21', '10:00 AM', '12:00 PM'),
+  createData('Event 2', '2023-09-22', '2:00 PM', '4:00 PM'),
+  createData('Event 3', '2023-09-23', '11:00 AM', '1:00 PM'),
+  createData('Event 4', '2023-09-24', '3:30 PM', '5:30 PM'),
+  createData('Event 5', '2023-09-25', '9:00 AM', '11:30 AM'),
 ];
 
 export default function EventCard() {
@@ -101,7 +85,7 @@ export default function EventCard() {
 
     // Filter the rows based on the search text
     const filtered = initialRows.filter((row) =>
-      row.name.toLowerCase().includes(searchText)
+      row.event.toLowerCase().includes(searchText)
     );
 
     setFilteredRows(filtered);
@@ -112,7 +96,7 @@ export default function EventCard() {
       setSelectedOption(value);
 
       // Filter the rows based on the selected option
-      const filtered = initialRows.filter((row) => row.name.toLowerCase() === value.toLowerCase());
+      const filtered = initialRows.filter((row) => row.event.toLowerCase() === value.toLowerCase());
 
       setFilteredRows(filtered);
     }
@@ -128,7 +112,7 @@ export default function EventCard() {
                 freeSolo
                 id="free-solo-2-demo"
                 disableClearable
-                options={initialRows.map((option) => option.name)}
+                options={initialRows.map((option) => option.event)}
                 value={selectedOption}
                 onInputChange={(event, value) => handleSearchInputChange(event, value)} // Handle input change
                 onChange={(event, value) => handleOptionSelect(event, value)} // Handle option select
@@ -151,15 +135,14 @@ export default function EventCard() {
           <TableRow sx={{ height: 2 }}>
             <TableCell />
             <TableCell>Event</TableCell>
-            <TableCell>Start Date</TableCell>
+            <TableCell>Date</TableCell>
             <TableCell>Start Time</TableCell>
-            <TableCell>End Date</TableCell>
             <TableCell>End Time</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {filteredRows.map((row) => (
-            <Row key={row.name} row={row} />
+            <Row key={row.event} row={row} />
           ))}
         </TableBody>
       </Table>

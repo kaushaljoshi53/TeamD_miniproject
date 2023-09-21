@@ -4,14 +4,14 @@ import { sequelizeObj } from '../database/dbConnect';
 // Define the User model that extends from Sequelize's Model class
 class Projects extends Model {
     public projectName!: string;
-    public projectStartDate!: Date;
-    public allocationEndDate!: Date;
+    public projectStartDate!: string;
+    public allocationEndDate!: string;
     public projectManager!: string;
     public projectStatus!: string;
     public resource!: string;
     public approver!: string;
-    public allocationStartDate!: Date;
-    public projectEndDate!: Date;
+    public allocationStartDate!: string;
+    public projectEndDate!: string;
     public allocationStatus!:string;
     public softDeleted!: boolean;
 
@@ -35,16 +35,16 @@ Projects.init(
             type: DataTypes.STRING,
         },
         allocationStartDate: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
         },
         allocationEndDate: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
         },
         projectStartDate: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
         },
         projectEndDate: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
         },
         projectStatus: {
             type: DataTypes.STRING,
