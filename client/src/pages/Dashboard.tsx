@@ -11,6 +11,9 @@ import Birthday from '../components/Birthday';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import NewEvent from '../components/NewEvent';
+import MyForm from '../components/Eventform';
+import UserEvent from '../components/UaserEvent';
 
 
 
@@ -145,14 +148,23 @@ export const Dashboard: React.FC = () => {
                         </div>        
                     </p>
                 </div>
-                <div className='event'>
+                <div className='project'>
+                    <NewEvent />
+                </div>
+                <div className='project'>
+                    <UserEvent />
+                </div>
+                {/* <div className='event'>
                     <Event />
                     <div className='holiday'>
                         <PublicHoliday />
                     </div>
-                </div>
-                <div className='project'>
+                </div> */}
+                {/* <div className='project'>
                     <Project />
+                </div> */}
+                <div className='project'>
+                    <MyForm />
                 </div>
             </div>
         </div>    
